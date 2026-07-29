@@ -1,34 +1,31 @@
-using System;
-using NUnit.Framework;
-using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    public CharacterController controller;
-    public float runSpeed;
-    private float[] laneXPos = { -1f, 0f, 1f };
-    private int currentLaneIndex = 1;
-    Vector3 moveDir;
-    private float moveX;
+     CharacterController CC { get;set; }
+    [Range(0, 20)]
+    public float VerticalSpeed = 5;
+    [Range(0, 20)]
+    public float HorizontalSpeed = 5;
+    private void Start()
+    {
+        CC = this.transform.GetComponent<CharacterController>();
+    }
 
     private void Update()
     {
-        Move();
-        Inputs();
+        move();
     }
-    private void Inputs()
-    {
-        moveX = Input.GetAxis("Horizontal");
-    }
-    private void Move()
-    {
-        moveDir.z = runSpeed * Time.deltaTime;
-        moveDir.x = moveX *runSpeed* Time.deltaTime;
 
-        controller.Move(moveDir);
+    void move()
+    {
+        float fwd_Dir = 1;
+        float right = Input.GetAxis("Horizontal") * HorizontalSpeed;
+        float forward = fwd_Dir * VerticalSpeed ;
+        Vector3 DesiredMoveDir = new Vector3(right, 0, forward);
+        CC?.Move(DesiredMoveDir * Time.deltaTime);
     }
-    
 }
 
 
