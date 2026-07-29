@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Slap : MonoBehaviour
 {
@@ -32,19 +33,31 @@ public class Slap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if(Input.touchCount > 0)
+#if UNITY_ANDROID
+        if(Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             if(touch.phase == TouchPhase.Began)
             {
+                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                {
+                    Debug.Log("Touch on UI");
+                    return;
+                }
             slap(ESlap_type);
             }
 
         }
+#endif
 
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
         if (Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                Debug.Log("Touch on UI");
+                return;
+            }
             slap(ESlap_type);
         }
 
