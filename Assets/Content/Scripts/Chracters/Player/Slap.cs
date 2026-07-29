@@ -39,7 +39,9 @@ public class Slap : MonoBehaviour
         if (getCurrentTarget() != null)
         {
 
-        Gizmos.DrawSphere(getCurrentTarget().transform.position, 0.8f);
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(getCurrentTarget().transform.position , 1f);
+   
         }
     }
     void slap(ESlapType e_slapType)
