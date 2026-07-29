@@ -10,6 +10,10 @@ public class Slap : MonoBehaviour
     [Range(0, 10)]
     public float SlapRange = 1;
     public List<GameObject> totatWorldTargets;
+
+    //Mobile Inputs
+    Touch touch;
+    
     public enum ESlapType { 
     
         none,
@@ -28,11 +32,23 @@ public class Slap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+      if(Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if(touch.phase == TouchPhase.Began)
+            {
+            slap(ESlap_type);
+            }
+
+        }
+
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
         if (Input.GetMouseButtonDown(0))
         {
             slap(ESlap_type);
         }
+
+#endif
     }
     private void OnDrawGizmos()
     {
@@ -82,9 +98,9 @@ public class Slap : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.CompareTag("npc")){
+       /* if(other.transform.CompareTag("npc")){
             Current_Enemy = other.gameObject;
-        }
+        }*/
     }
     GameObject getCurrentTarget()
     {
