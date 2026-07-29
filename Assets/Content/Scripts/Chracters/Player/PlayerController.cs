@@ -8,9 +8,15 @@ public class PlayerController : MonoBehaviour
     public float VerticalSpeed = 5;
     [Range(0, 20)]
     public float HorizontalSpeed = 5;
+
+    public static PlayerController playerController_Instance;
     private void Start()
     {
         CC = this.transform.GetComponent<CharacterController>();
+        if(playerController_Instance == null)
+        {
+            playerController_Instance = this;
+        }
     }
 
     private void Update()

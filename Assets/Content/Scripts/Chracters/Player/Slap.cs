@@ -1,17 +1,116 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Slap : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    Animator animator { get; set; }
+     Animator animator;
+    private GameObject Current_Enemy;
+    public GameObject PlayerMesh;
+    [Range(0, 10)]
+    public float SlapRange = 1;
+    public List<GameObject> totatWorldTargets;
+    public enum ESlapType { 
+    
+        none,
+        front_slap,
+        right_slap,
+        left_slap,
+    
+    }
+    public ESlapType ESlap_type = ESlapType.right_slap;
     void Start()
     {
-        animator = transform.GetComponent<Animator>();
+        totatWorldTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("npc"));
+        animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+    
+        if (Input.GetMouseButtonDown(0))
+        {
+            slap(ESlap_type);
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        if (getCurrentTarget() != null)
+        {
+
+        Gizmos.DrawSphere(getCurrentTarget().transform.position, 0.8f);
+        }
+    }
+    void slap(ESlapType e_slapType)
+    {
+        
+        animator.SetTrigger(e_slapType.ToString());
+        ChooseSlapType(ref e_slapType);
+
         
     }
+    void ChooseSlapType(ref ESlapType slapType)
+    {
+        if (getCurrentTarget() == null)
+        {
+            return;
+        }
+        Vector3 RelativeLocation = transform.InverseTransformPoint(getCurrentTarget().transform.position);
+        if(RelativeLocation.x > 0)
+        {
+            Flip_animation_temp(1);
+            slapType = ESlapType.right_slap;
+        }
+        else if(RelativeLocation.x < 0)
+        {
+            Flip_animation_temp(-1);
+            slapType = ESlapType.left_slap;
+        }
+        else if(RelativeLocation.z > 0)
+        {
+            slapType = ESlapType.front_slap;
+        }
+        else
+        {
+            slapType = ESlapType.right_slap;
+
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.transform.CompareTag("npc")){
+            Current_Enemy = other.gameObject;
+        }
+    }
+    GameObject getCurrentTarget()
+    {
+  
+       GameObject bestTarget = null;
+        float Bestcost = Mathf.Infinity;
+        float MaxDistance = SlapRange;
+        foreach(var target in totatWorldTargets)
+        {
+            float dist = Vector3.Distance(transform.position, target.transform.position);
+            if (dist > MaxDistance)
+            {
+                continue;
+            }
+            if(dist < Bestcost)
+            {
+                Bestcost = dist;
+                bestTarget = target;
+            }
+        }
+
+        return bestTarget;
+    }
+    void Flip_animation_temp(float flipdir)
+    {
+        
+        PlayerMesh.transform.localScale = new Vector3(flipdir,1,1);
+
+    }
+  
 }
