@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Slap : MonoBehaviour
+public class SlapManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
      Animator animator;
@@ -10,7 +10,7 @@ public class Slap : MonoBehaviour
     public GameObject PlayerMesh;
     [Range(0, 10)]
     public float SlapRange = 1;
-    public List<GameObject> totatWorldTargets;
+    private List<GameObject> totatWorldTargets;
 
     //Mobile Inputs
     Touch touch;

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7986247967735541165}
   - component: {fileID: 5819019116565564685}
   - component: {fileID: 7002400611527270402}
+  - component: {fileID: 33871963360692359}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +107,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -114,6 +115,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &33871963360692359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4848004572636711432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b11ea281a5c4e4c9800f987fb3843f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Employee
+  type: 3
+  HeatIncreaseValue: 5
 --- !u!1 &8256331562953699679
 GameObject:
   m_ObjectHideFlags: 0
