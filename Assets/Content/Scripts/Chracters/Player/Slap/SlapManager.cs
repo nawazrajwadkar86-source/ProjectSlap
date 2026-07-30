@@ -5,13 +5,21 @@ using UnityEngine.EventSystems;
 public class SlapManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-     Animator animator;
+    Animator animator;
     private GameObject Current_Enemy;
     public GameObject PlayerMesh;
     [Range(0, 10)]
     public float SlapRange = 1;
+    [Range(0, 10)]
+    public float AutoSlapRange = 1;
     private List<GameObject> totatWorldTargets;
 
+    public enum ESlapMode
+    {
+        auto,
+        manual
+    }
+    public ESlapMode SlapMode = ESlapMode.auto;
     //Mobile Inputs
     Touch touch;
     
@@ -51,15 +59,29 @@ public class SlapManager : MonoBehaviour
 #endif
 
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-        if (Input.GetMouseButtonDown(0))
+
+        switch (SlapMode)
         {
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                Debug.Log("Touch on UI");
-                return;
-            }
-            slap(ESlap_type);
+            case ESlapMode.auto:
+
+                AutoSlap(ESlap_type);
+
+                break;
+            case ESlapMode.manual:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (EventSystem.current.IsPointerOverGameObject())
+                    {
+                        Debug.Log("Touch on UI");
+                        return;
+                    }
+                    Manualslap(ESlap_type);
+                }
+
+                break;
         }
+
+      
 
 #endif
     }
@@ -73,12 +95,41 @@ public class SlapManager : MonoBehaviour
    
         }
     }
-    void slap(ESlapType e_slapType)
+    public void Switch_mode(int n)
     {
-        
+        switch (n)
+        {
+            case 0:
+                SlapMode = ESlapMode.auto;
+                break;
+            case 1:
+                SlapMode = ESlapMode.manual;
+                break;
+        }
+    }
+    void Manualslap(ESlapType e_slapType)
+    {
         animator.SetTrigger(e_slapType.ToString());
         ChooseSlapType(ref e_slapType);
+            
+    }
 
+    void AutoSlap(ESlapType e_slapType)
+    {
+        float Dist = Vector3.Distance(getCurrentTarget().transform.position, transform.position);
+        Target target = getCurrentTarget().GetComponent<Target>();
+       
+        if(Dist < AutoSlapRange)
+        {
+            if (target.bisSlapped)
+            {
+                return;
+            }
+            ChooseSlapType(ref e_slapType);
+            animator.SetTrigger(e_slapType.ToString());
+            target.bisSlapped = true;
+        
+        }
         
     }
     void ChooseSlapType(ref ESlapType slapType)

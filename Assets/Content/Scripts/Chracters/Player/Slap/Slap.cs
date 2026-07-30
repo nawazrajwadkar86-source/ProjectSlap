@@ -22,16 +22,8 @@ public class Slap: MonoBehaviour
         if (other.transform.CompareTag("npc"))
         {
             Target target =  other.transform.GetComponent<Target>();
-            if (target != null)
-            {
-                Debug.Log("Target Found");
-            }
-            else
-            {
-                Debug.Log("Target not found");
-            }
                 target?.CallOnHitTargetEvent(target.type);
-            Debug.LogWarning("Trigger SLAPPED !");
+            Debug.LogWarning("Trigger SLAPPEDDDDDDDDD !");
         }
     }
 }

@@ -20,12 +20,15 @@ abstract public class Target : MonoBehaviour
     public float MultipleSlapValue = 0.2f;
     public event Action<ETargetType> onTargetHit;
     public Animator animator;
+
+    [HideInInspector] public bool bisSlapped;
     private void OnEnable()
     {
         onTargetHit += ReceiveDamage;
         onTargetHit += UpdateScore;
         onTargetHit += UpdateHeatMeter;
         onTargetHit += UpdateMultiSlapMeter;
+ 
     }
     private void OnDisable()
     {
@@ -34,6 +37,8 @@ abstract public class Target : MonoBehaviour
         onTargetHit -= UpdateScore;
         onTargetHit -= UpdateHeatMeter;
         onTargetHit -= UpdateMultiSlapMeter;
+
+
     }
     void Start()
     {
@@ -65,6 +70,7 @@ abstract public class Target : MonoBehaviour
     {
         Debug.Log("update MultiSlap");
     }
+
     public void CallOnHitTargetEvent(ETargetType type)
     {
         Debug.Log("Event Called");
