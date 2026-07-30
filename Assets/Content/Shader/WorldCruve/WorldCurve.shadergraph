@@ -2314,13 +2314,13 @@
     "m_Name": "",
     "m_ChildObjectList": [
         {
-            "m_Id": "fce23a616d084cd3b96fb3f9f1e33a9e"
-        },
-        {
             "m_Id": "83d80d03023f42619ba7d7b197d81e62"
         },
         {
             "m_Id": "68778c59f4b941679e942d409bb6f1ae"
+        },
+        {
+            "m_Id": "fce23a616d084cd3b96fb3f9f1e33a9e"
         }
     ]
 }
@@ -2996,7 +2996,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 0.0,
+    "m_Value": 0.001500000013038516,
     "m_FloatType": 0,
     "m_LiteralFloatMode": false,
     "m_RangeValues": {
