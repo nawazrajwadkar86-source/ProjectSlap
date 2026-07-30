@@ -23,5 +23,6 @@ public class HeatMeter : MonoBehaviour
     private void LateUpdate()
     {
         heat_slider.value = Heat_val;
+
     }
 }

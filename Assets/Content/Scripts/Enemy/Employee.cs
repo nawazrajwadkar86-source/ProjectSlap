@@ -13,4 +13,18 @@ public class Employee : Target
     {
         
     }
+    protected override void ReceiveDamage(ETargetType type)
+    {
+
+        animator.SetTrigger("hit");
+    }
+    protected override void UpdateMultiSlapMeter(ETargetType type)
+    {
+        MultiSlap.multiSlap_instance.slider.fillAmount += MultipleSlapValue;
+    }
+    protected override void UpdateHeatMeter(ETargetType type)
+    {
+        HeatMeter.HeatMeter_Instance.Heat_val += HeatIncreaseValue;
+    
+    }
 }
