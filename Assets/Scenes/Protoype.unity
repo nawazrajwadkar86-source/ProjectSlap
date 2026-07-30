@@ -1470,7 +1470,7 @@ MonoBehaviour:
   pools:
   - poolObject: 0
     prefab: {fileID: 892603621776904376, guid: 0e2156064053f2643b0457059cfc3fb7, type: 3}
-    size: 5
+    size: 15
   - poolObject: 1
     prefab: {fileID: 5119335242408291500, guid: f38af3e3b6996fb4fa45219d8392d068, type: 3}
     size: 5
