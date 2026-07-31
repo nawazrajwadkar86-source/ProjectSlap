@@ -42,20 +42,34 @@ public class SlapManager : MonoBehaviour
     void Update()
     {
 #if UNITY_ANDROID
-        if(Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if(touch.phase == TouchPhase.Began)
-            {
-                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-                {
-                    Debug.Log("Touch on UI");
-                    return;
-                }
-            Manualslap(ESlap_type);
-            }
 
+        switch (SlapMode)
+        {
+            case ESlapMode.auto:
+
+                AutoSlap(ESlap_type);
+
+                break;
+            case ESlapMode.manual:
+                if (Input.touchCount > 0)
+                {
+                    Touch touch = Input.GetTouch(0);
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                        {
+                            Debug.Log("Touch on UI");
+                            return;
+                        }
+                        Manualslap(ESlap_type);
+                    }
+
+                }
+
+                break;
         }
+
+       
 #endif
 
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
