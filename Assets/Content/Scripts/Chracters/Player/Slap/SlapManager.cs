@@ -116,6 +116,9 @@ public class SlapManager : MonoBehaviour
 
     void AutoSlap(ESlapType e_slapType)
     {
+        if(getCurrentTarget() != null)
+        {
+
         float Dist = Vector3.Distance(getCurrentTarget().transform.position, transform.position);
         Target target = getCurrentTarget().GetComponent<Target>();
        
@@ -131,6 +134,7 @@ public class SlapManager : MonoBehaviour
         
         }
         
+        }
     }
     void ChooseSlapType(ref ESlapType slapType)
     {
@@ -172,20 +176,22 @@ public class SlapManager : MonoBehaviour
        GameObject bestTarget = null;
         float Bestcost = Mathf.Infinity;
         float MaxDistance = SlapRange;
-        foreach(var target in totatWorldTargets)
+        if (totatWorldTargets != null)
         {
-            float dist = Vector3.Distance(transform.position, target.transform.position);
-            if (dist > MaxDistance)
+            foreach (var target in totatWorldTargets)
             {
-                continue;
-            }
-            if(dist < Bestcost)
-            {
-                Bestcost = dist;
-                bestTarget = target;
+                float dist = Vector3.Distance(transform.position, target.transform.position);
+                if (dist > MaxDistance)
+                {
+                    continue;
+                }
+                if (dist < Bestcost)
+                {
+                    Bestcost = dist;
+                    bestTarget = target;
+                }
             }
         }
-
         return bestTarget;
     }
     void Flip_animation_temp(float flipdir)
