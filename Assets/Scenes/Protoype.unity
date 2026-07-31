@@ -970,22 +970,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPooling
   pools:
   - poolObject: 0
-    prefab: {fileID: 892603621776904376, guid: 0e2156064053f2643b0457059cfc3fb7, type: 3}
-    size: 15
+    prefab:
+    - {fileID: 892603621776904376, guid: 0e2156064053f2643b0457059cfc3fb7, type: 3}
+    - {fileID: 7259649962461410384, guid: 6eda98dd3cabe7b43b90af0730d7659d, type: 3}
+    size: 5
   - poolObject: 1
-    prefab: {fileID: 5119335242408291500, guid: f38af3e3b6996fb4fa45219d8392d068, type: 3}
+    prefab:
+    - {fileID: 5119335242408291500, guid: f38af3e3b6996fb4fa45219d8392d068, type: 3}
     size: 5
   - poolObject: 2
-    prefab: {fileID: 5871324657080841520, guid: 4c4f0342ac38aa540acbf0a8821b0a83, type: 3}
+    prefab:
+    - {fileID: 5871324657080841520, guid: 4c4f0342ac38aa540acbf0a8821b0a83, type: 3}
     size: 5
   - poolObject: 3
-    prefab: {fileID: 5154434923156462347, guid: aa0245a2adf443145838c2abd4c5e93c, type: 3}
+    prefab:
+    - {fileID: 5154434923156462347, guid: aa0245a2adf443145838c2abd4c5e93c, type: 3}
     size: 5
   - poolObject: 4
-    prefab: {fileID: 4614072787175294485, guid: a7431d5023a564044a13970843ecda01, type: 3}
+    prefab:
+    - {fileID: 4614072787175294485, guid: a7431d5023a564044a13970843ecda01, type: 3}
     size: 5
   - poolObject: 5
-    prefab: {fileID: 7706890902966284075, guid: 549af54ac07f13d4bbea504108e82e7b, type: 3}
+    prefab:
+    - {fileID: 7706890902966284075, guid: 549af54ac07f13d4bbea504108e82e7b, type: 3}
     size: 5
 --- !u!4 &1283956180
 Transform:
@@ -1015,7 +1022,7 @@ GameObject:
   - component: {fileID: 1342341025}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

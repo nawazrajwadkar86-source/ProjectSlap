@@ -9,21 +9,18 @@ public class LevelGenrator : MonoBehaviour
     public List<Chunk> chunks;
     private Queue<GameObject> chunksQueue = new Queue<GameObject>();
     public const int chunkLength = 60;
-    ObjectPooling objectPooling;
+    ChunkPooling objectPooling;
     private int currentGenChunkIndex;
     private int currentCreateIndex = 1;
     private int nextChunkGenCallPos;
 
-
-private float time;
     private void Start()
     {
-        objectPooling = ObjectPooling.instance;
+        objectPooling = ChunkPooling.instance;
         GenrateStartingChunk();
     }
     private void Update()
     {
-        time += Time.deltaTime;
         GenrateChunkPerSection();
     }
     private void GenrateChunkPerSection()
@@ -34,7 +31,6 @@ private float time;
 
             //initial chunk
             objectPooling.StoreObject(chunksQueue.Dequeue());
-            Debug.Log(time);
 
             nextChunkGenCallPos = currentCreateIndex * chunkLength;
             currentCreateIndex++;
@@ -61,8 +57,8 @@ private float time;
     }
     private void GenerateChunk()
     {
-        //int RandomChunk = Random.Range(0, chunks.Count);
-        int RandomChunk = 0;
+        int RandomChunk = Random.Range(0, chunks.Count);
+        //int RandomChunk = 0;
         Chunk chunk = chunks[RandomChunk];
         GameObject newChunk = null;
         Vector3 nextChunkPosition = new Vector3(0, 0, currentGenChunkIndex * chunkLength);

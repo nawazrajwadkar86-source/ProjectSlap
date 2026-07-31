@@ -2,19 +2,19 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-public class ObjectPooling : MonoBehaviour
+public class ChunkPooling : MonoBehaviour
 {
    
     #region Singleton
 
-    public static ObjectPooling instance;
+    public static ChunkPooling instance;
 
     #endregion
     [System.Serializable]
     public class pool
     {
         public poolObject poolObject;
-        public GameObject prefab;
+        public List<GameObject> prefab;
         public int size;
     }
 
@@ -41,9 +41,12 @@ public class ObjectPooling : MonoBehaviour
             List<GameObject> objectPool = new List<GameObject>();
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject g = Instantiate(pool.prefab,transform);
-                g.SetActive(false);
-                objectPool.Add(g);
+                for (int j = 0; j < pool.prefab.Count;j++)
+                {
+                    GameObject g = Instantiate(pool.prefab[j],transform);
+                    g.SetActive(false);
+                    objectPool.Add(g);
+                }
             }
             poolDictionary.Add(pool.poolObject.ToString(), objectPool);
         }
