@@ -52,7 +52,7 @@ public class SlapManager : MonoBehaviour
                     Debug.Log("Touch on UI");
                     return;
                 }
-            slap(ESlap_type);
+            Manualslap(ESlap_type);
             }
 
         }
