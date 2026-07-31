@@ -83,7 +83,6 @@ public class LevelGenrator : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Generated " +chunk.chunkType.ToString()+  " chunk");
         chunksQueue.Enqueue(newChunk);
         currentGenChunkIndex++;
     }
