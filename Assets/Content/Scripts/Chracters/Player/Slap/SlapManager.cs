@@ -14,6 +14,8 @@ public class SlapManager : MonoBehaviour
     public float AutoSlapRange = 1;
     private List<GameObject> totatWorldTargets;
 
+    public static SlapManager slapManager_instance;
+    [HideInInspector] public bool bMultiSlap = false; 
     public enum ESlapMode
     {
         auto,
@@ -36,6 +38,10 @@ public class SlapManager : MonoBehaviour
     {
         totatWorldTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("npc"));
         animator = transform.GetChild(0).GetComponent<Animator>();
+        if(slapManager_instance == null)
+        {
+            slapManager_instance = this;
+        }
     }
 
     // Update is called once per frame
@@ -150,6 +156,7 @@ public class SlapManager : MonoBehaviour
         
         }
     }
+ 
     void ChooseSlapType(ref ESlapType slapType)
     {
         if (getCurrentTarget() == null)

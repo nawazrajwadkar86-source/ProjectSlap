@@ -248,7 +248,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 145174987}
   m_OnClick:
     m_PersistentCalls:
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1326,7 +1326,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.3
+  m_Radius: 0.45
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &494996957
 Rigidbody:
@@ -1374,7 +1374,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.3
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &494996960
 MonoBehaviour:
@@ -1388,6 +1388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2356a949180895d4793d7f1e56eb7959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slap
+  Hand_Bone: {fileID: 494996951}
 --- !u!114 &494996961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1400,6 +1401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2356a949180895d4793d7f1e56eb7959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slap
+  Hand_Bone: {fileID: 494996952}
 --- !u!1 &519627887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2626,6 +2628,7 @@ MonoBehaviour:
   PlayerMesh: {fileID: 1136894240}
   SlapRange: 10
   AutoSlapRange: 1.5
+  bMultiSlap: 0
   SlapMode: 0
   ESlap_type: 2
 --- !u!1 &1343957981

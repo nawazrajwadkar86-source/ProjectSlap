@@ -33,7 +33,16 @@ public class MultiSlap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(slider.fillAmount >= 1)
+        {
+
+            OnMultiSlapMeterFull?.Invoke();
+        }
+    }
+    public void ActivateMultiSlap()
+    {
+            SlapManager.slapManager_instance.bMultiSlap = true;
+
     }
     private void EnableMultiSlap()
     {
