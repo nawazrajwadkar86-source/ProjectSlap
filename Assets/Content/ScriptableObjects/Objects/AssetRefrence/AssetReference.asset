@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db4d1cbb2402784faef1de1ecab83a2, type: 3}
+  m_Name: AssetReference
+  m_EditorClassIdentifier: Assembly-CSharp::AssetReference
+  worldCurveMaterial:
+  - {fileID: 2100000, guid: 0882631cbc89df849a6a934a2e6b9266, type: 2}
+  - {fileID: 2100000, guid: 10b9c64fa3a8af64ab901f8d0c8062a7, type: 2}
+  - {fileID: 2100000, guid: 8ca4d041a066d1246826e6a1b253b707, type: 2}
+  - {fileID: 2100000, guid: a921ea67b8a1b974db19e452c3ba9961, type: 2}
+  - {fileID: 2100000, guid: fd54d40a40740d34a82407ea1ad34619, type: 2}
+  - {fileID: 2100000, guid: ed8e5af4d95ea5e40a30a1e2b2a14359, type: 2}
+  - {fileID: 2100000, guid: 1ab00ae723e7cf94f93f64d8fc5957be, type: 2}
+  - {fileID: 2100000, guid: 0ff40e64405b0e9419a07048a26b30f9, type: 2}
+  - {fileID: 2100000, guid: 938856172c0e9de4197cfcb9fa6d3d94, type: 2}
+  - {fileID: 2100000, guid: a7ad37b80bd9cf247b764deddbd666a2, type: 2}
+  - {fileID: 2100000, guid: 1a8c2b26fb0c56e438dd47e1f1b9b803, type: 2}
+  - {fileID: 2100000, guid: 1a4199155d2ee6147847c38d6f4c030f, type: 2}

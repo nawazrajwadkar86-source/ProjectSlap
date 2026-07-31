@@ -36,8 +36,6 @@ public class LevelGenrator : MonoBehaviour
             currentCreateIndex++;
         }
     }
-
-
     private void GenrateStartingChunk()
     {
         //genrate starting 5 chunks;
@@ -57,8 +55,8 @@ public class LevelGenrator : MonoBehaviour
     }
     private void GenerateChunk()
     {
-        int RandomChunk = Random.Range(0, chunks.Count);
-        //int RandomChunk = 0;
+        //int RandomChunk = Random.Range(0, chunks.Count);
+        int RandomChunk = 0;
         Chunk chunk = chunks[RandomChunk];
         GameObject newChunk = null;
         Vector3 nextChunkPosition = new Vector3(0, 0, currentGenChunkIndex * chunkLength);

@@ -6,7 +6,7 @@ public class StaticDoor : MonoBehaviour
 {
     public List<GameObject> doors = new List<GameObject>();
     int openedDoorIndex;
-    public void Enable()
+    public void OnEnable()
     {
         openedDoorIndex = Random.Range(0,doors.Count);
         doors[openedDoorIndex].SetActive(false);

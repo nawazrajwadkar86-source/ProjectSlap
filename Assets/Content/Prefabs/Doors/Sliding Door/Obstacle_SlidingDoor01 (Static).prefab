@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48,9 +48,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4605669358118339839, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3250741175455586629, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
       propertyPath: m_Name
       value: Obstacle_SlidingDoor01 (Static)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5385675515949273585, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
