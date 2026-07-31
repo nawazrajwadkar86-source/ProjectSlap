@@ -1,17 +1,21 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Slap : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    Animator animator { get; set; }
     void Start()
     {
-        animator = transform.GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void Restart_lvl()
+    {
+        SceneManager.LoadScene(0);
     }
 }

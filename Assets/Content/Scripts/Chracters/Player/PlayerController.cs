@@ -8,17 +8,29 @@ public class PlayerController : MonoBehaviour
     public float VerticalSpeed = 5;
     [Range(0, 20)]
     public float HorizontalSpeed = 5;
+
+    public static PlayerController playerController_Instance;
+    private int DirX = 0;
     private void Start()
     {
         CC = this.transform.GetComponent<CharacterController>();
+        if(playerController_Instance == null)
+        {
+            playerController_Instance = this;
+        }
     }
 
     private void Update()
     {
-        move();
-    }
 
-    void move()
+        PCmovement();
+        Androidmovement();
+    }
+    public void HorizontalMove(int dir)
+    {
+        DirX = dir;
+    }
+    void PCmovement()
     {
         float fwd_Dir = 1;
         float right = Input.GetAxis("Horizontal") * HorizontalSpeed;
@@ -26,6 +38,15 @@ public class PlayerController : MonoBehaviour
         Vector3 DesiredMoveDir = new Vector3(right, 0, forward);
         CC?.Move(DesiredMoveDir * Time.deltaTime);
     }
+    void Androidmovement()
+    {
+        float fwd_Dir = 1;
+        float right = DirX * HorizontalSpeed;
+        float forward = fwd_Dir * VerticalSpeed;
+        Vector3 DesiredMoveDir = new Vector3(right, 0, forward);
+        CC?.Move(DesiredMoveDir * Time.deltaTime);
+    }
+
 }
 
 

@@ -192,7 +192,7 @@ ModelImporter:
       parentName: Low_00002_:RightForeArm
       position: {x: 0.00012232961, y: 0.1748215, z: -0.021706287}
       rotation: {x: 0.0019573972, y: 0.0040248595, z: -0.0001456188, w: 0.99999005}
-      scale: {x: 0.9938933, y: 1.0059241, z: 1.0005791}
+      scale: {x: 0.9938933, y: 1.0059241, z: 1.000579}
     - name: RightShoulder
       parentName: Low_00002_:Spine2
       position: {x: -0.08528617, y: 0.059797253, z: 0.0007400158}
@@ -202,17 +202,17 @@ ModelImporter:
       parentName: RightShoulder
       position: {x: -7.413542e-12, y: 0.15057278, z: -4.5029702e-10}
       rotation: {x: 0.0053764284, y: 0.00042393804, z: 0.004885271, w: 0.99997354}
-      scale: {x: 1.0996205, y: 0.8112794, z: 1.2195851}
+      scale: {x: 1.0996206, y: 0.8112794, z: 1.2195851}
     - name: RightForeArm
       parentName: RightArm
       position: {x: 0.017332563, y: 0.11930713, z: 0.030144118}
       rotation: {x: 0.004527502, y: -0.0014653971, z: 0.00031998497, w: 0.9999886}
-      scale: {x: 1.0082, y: 0.9894762, z: 1.0046338}
+      scale: {x: 1.0081998, y: 0.9894762, z: 1.0046338}
     - name: RightHand
       parentName: RightForeArm
       position: {x: 0.0014375615, y: 0.15426926, z: -0.0042253295}
       rotation: {x: -0.01141777, y: 0.003940717, z: -0.00083215145, w: 0.9999267}
-      scale: {x: 1.0000265, y: 0.9997389, z: 1.0002621}
+      scale: {x: 1.0000267, y: 0.9997389, z: 1.0002621}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -229,7 +229,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
