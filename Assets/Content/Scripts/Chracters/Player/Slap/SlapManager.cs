@@ -56,7 +56,7 @@ public class SlapManager : MonoBehaviour
                     Touch touch = Input.GetTouch(0);
                     if (touch.phase == TouchPhase.Began)
                     {
-                        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)|| EventSystem.current.IsPointerOverGameObject())
                         {
                             Debug.Log("Touch on UI");
                             return;
