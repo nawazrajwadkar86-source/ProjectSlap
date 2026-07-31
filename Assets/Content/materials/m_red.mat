@@ -119,7 +119,7 @@ Material:
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
-    - _curve_Amount: -0.0015
+    - _curve_Amount: 0.0015
     m_Colors:
     - _BaseColor: {r: 0.745283, g: 0.05273228, b: 0.05273228, a: 1}
     - _Base_color: {r: 0.74509805, g: 0.050980393, b: 0.050980393, a: 1}
