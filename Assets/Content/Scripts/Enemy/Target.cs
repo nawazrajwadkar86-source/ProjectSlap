@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 abstract public class Target : MonoBehaviour
 {
