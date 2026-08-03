@@ -24,7 +24,7 @@ public class Employee : Target
     }
     protected override void UpdateHeatMeter(ETargetType type)
     {
-      //  HeatMeter.HeatMeter_Instance.Heat_val += HeatIncreaseValue;
+        HeatMeter.HeatMeter_Instance.Heat_val += HeatIncreaseValue;
     
     }
 }

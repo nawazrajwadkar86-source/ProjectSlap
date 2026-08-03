@@ -63,6 +63,8 @@ abstract public class Target : MonoBehaviour
     protected virtual void UpdateHeatMeter(ETargetType type)
     {
         Debug.Log("update Score");
+    
+
     }
 
     protected virtual void UpdateMultiSlapMeter(ETargetType type)
