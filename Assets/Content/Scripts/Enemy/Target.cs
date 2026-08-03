@@ -14,7 +14,7 @@ abstract public class Target : MonoBehaviour
     }
     public ETargetType type = ETargetType.employee;
     [Range(0,20)]
-    public float HeatIncreaseValue = 5;
+    public float HeatIncreaseValue = 0.2f;
     [Range(0,1)]
     public float MultipleSlapValue = 0.2f;
     public event Action<ETargetType> onTargetHit;
@@ -63,6 +63,8 @@ abstract public class Target : MonoBehaviour
     protected virtual void UpdateHeatMeter(ETargetType type)
     {
         Debug.Log("update Score");
+    
+
     }
 
     protected virtual void UpdateMultiSlapMeter(ETargetType type)
