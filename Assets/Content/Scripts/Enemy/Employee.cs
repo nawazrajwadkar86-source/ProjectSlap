@@ -5,7 +5,7 @@ public class Employee : Target
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        this.HeatIncreaseValue = 0.05f;
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class Employee : Target
     }
     protected override void UpdateHeatMeter(ETargetType type)
     {
-        HeatMeter.HeatMeter_Instance.Heat_val += HeatIncreaseValue;
+        HeatMeter.HeatMeter_Instance.Updateheat(HeatIncreaseValue);
     
     }
 }
