@@ -18,7 +18,7 @@ public class CoinScoreManager : MonoBehaviour
     }
     void Start()
     {
-        coinScoreTxt.text = $"$:{CoinScore}";
+        coinScoreTxt.text = $"{CoinScore}";
        
     }
 
@@ -39,7 +39,7 @@ public class CoinScoreManager : MonoBehaviour
     void UpdateCoinScore()
     {
         CoinScore ++;
-        coinScoreTxt.text =$"$:{CoinScore}";
+        coinScoreTxt.text =$"{CoinScore}";
     }
     public void EventOnCoinCollected()
     {
