@@ -25,9 +25,10 @@ public class Slap: MonoBehaviour
     }
     void SingeleSlap(Collider other)
     {
-                    Target target =  other.transform.GetComponent<Target>();
-                target?.CallOnHitTargetEvent(target.type);
-            Debug.LogWarning("Trigger SLAPPEDDDDDDDDD !");
+       Target target =  other.transform.GetComponent<Target>();
+       target?.CallOnHitTargetEvent(target.type);
+        SlapCounter.Instance.EventOnSlap();
+
     }
 
     private void OnTriggerEnter(Collider other)
