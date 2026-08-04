@@ -144,6 +144,9 @@ public class SlapManager : MonoBehaviour
        
         if(Dist < AutoSlapRange)
         {
+                if(target!= null)
+                {
+
             if (target.bisSlapped)
             {
                 return;
@@ -151,6 +154,7 @@ public class SlapManager : MonoBehaviour
             ChooseSlapType(ref e_slapType);
             animator.SetTrigger(e_slapType.ToString());
             target.bisSlapped = true;
+                }
         
         }
         
