@@ -27,6 +27,7 @@ abstract public class Target : MonoBehaviour
         onTargetHit += UpdateScore;
         onTargetHit += UpdateHeatMeter;
         onTargetHit += UpdateMultiSlapMeter;
+        onTargetHit += Reaction;
  
     }
     private void OnDisable()
@@ -36,6 +37,7 @@ abstract public class Target : MonoBehaviour
         onTargetHit -= UpdateScore;
         onTargetHit -= UpdateHeatMeter;
         onTargetHit -= UpdateMultiSlapMeter;
+        onTargetHit -= Reaction;
 
 
     }
@@ -71,7 +73,14 @@ abstract public class Target : MonoBehaviour
     {
         Debug.Log("update MultiSlap");
     }
+    protected virtual void Reaction(ETargetType type)
+    {
+       
+    }
+    protected virtual void SteeringSeparation()
+    {
 
+    }
     public void CallOnHitTargetEvent(ETargetType type)
     {
         Debug.Log("Event Called");
