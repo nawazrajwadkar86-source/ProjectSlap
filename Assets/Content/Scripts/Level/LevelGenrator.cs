@@ -1,6 +1,6 @@
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 public class LevelGenrator : MonoBehaviour
@@ -18,6 +18,8 @@ public class LevelGenrator : MonoBehaviour
     {
         objectPooling = ChunkPooling.instance;
         GenrateStartingChunk();
+
+        InitializeDebugging();
     }
     private void Update()
     {
@@ -33,6 +35,8 @@ public class LevelGenrator : MonoBehaviour
             objectPooling.StoreObject(chunksQueue.Dequeue());
 
             nextChunkGenCallPos = currentCreateIndex * chunkLength;
+
+            currentChunkIndex.text = "Current Chunk: " + currentCreateIndex.ToString();
             currentCreateIndex++;
         }
     }
@@ -85,6 +89,28 @@ public class LevelGenrator : MonoBehaviour
 
         chunksQueue.Enqueue(newChunk);
         currentGenChunkIndex++;
+    }
+
+        //Debugging
+    private Canvas canvas;
+    private TextMeshProUGUI currentChunkIndex;
+    private void InitializeDebugging()
+    {
+        canvas = FindAnyObjectByType<Canvas>();
+        currentChunkIndex = CreateText("Current Chunk: 0", new Vector2(-Screen.width / 2 + 100, Screen.height / 2 - 50));
+    }
+
+    private TextMeshProUGUI CreateText(string text, Vector2 position)
+    {
+        GameObject textObj = new GameObject("DebugText");
+        textObj.transform.SetParent(canvas.transform);
+        textObj.transform.localPosition = position;
+
+        TextMeshProUGUI textMesh = textObj.AddComponent<TextMeshProUGUI>();
+        textMesh.text = text;
+        textMesh.color = Color.red;
+        textMesh.fontSize = 24;
+        return textMesh;
     }
 }
 

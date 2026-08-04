@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96deac4c61f9a384681f285fa112931a, type: 3}
+  m_Name: AP_safe02
+  m_EditorClassIdentifier: Assembly-CSharp::ActorPlacement
+  PlacementSlots:
+  - placmenColumns: 000000000000000000000000
+  - placmenColumns: 000000000900000000000000
+  - placmenColumns: 020000000000000002000000
+  - placmenColumns: 030000000a00000004000000
+  - placmenColumns: 00000000000000000b000000
+  - placmenColumns: 000000000100000000000000
