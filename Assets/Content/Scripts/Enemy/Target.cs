@@ -83,6 +83,7 @@ abstract public class Target : MonoBehaviour
     }
     public void CallOnHitTargetEvent(ETargetType type)
     {
+
         Debug.Log("Event Called");
         onTargetHit?.Invoke(type);
     }

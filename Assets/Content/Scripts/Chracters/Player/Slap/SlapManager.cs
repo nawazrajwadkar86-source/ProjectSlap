@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,6 +18,8 @@ public class SlapManager : MonoBehaviour
 
     public static SlapManager slapManager_instance;
     [HideInInspector] public bool bMultiSlap = false; 
+
+
     public enum ESlapMode
     {
         auto,
@@ -151,16 +155,33 @@ public class SlapManager : MonoBehaviour
             {
                 return;
             }
+                    if (!target.bisSlapped)
+                    {
             ChooseSlapType(ref e_slapType);
             animator.SetTrigger(e_slapType.ToString());
-            target.bisSlapped = true;
+                        SlapCounter.Instance.EventOnSlap();
+                    StartCoroutine(Timer(0.3f, () => IsSlapped(target)));
+                        target.bisSlapped = true;
+                    }
+     
+                    //  target.bisSlapped = true;
                 }
         
         }
         
         }
     }
- 
+    IEnumerator Timer(float Delay,Action action)
+    {
+        yield return new WaitForSeconds(Delay);
+        action?.Invoke();
+    }
+    private void IsSlapped(Target target)
+    {
+                        target?.CallOnHitTargetEvent(target.type);
+
+    }
+
     void ChooseSlapType(ref ESlapType slapType)
     {
         if (getCurrentTarget() == null)

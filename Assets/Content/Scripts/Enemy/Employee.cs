@@ -36,7 +36,7 @@ public class Employee : Target
     }
     protected override void ReceiveDamage(ETargetType type)
     {
-        
+       // bisSlapped = true;
         animator.SetTrigger("hit");
     }
     protected override void UpdateMultiSlapMeter(ETargetType type)
@@ -68,12 +68,13 @@ public class Employee : Target
             }
             if (col.transform.CompareTag("npc"))
             {
-                separation += (transform.position - col.transform.position).normalized;
+                separation += (transform.position -
+                    col.transform.position).normalized;
             }
         }
             Vector3 Desired = (player.transform.position - transform.position).normalized + separation * 2;
             targetLocation = transform.position + Desired;
-      //  transform.position = targetLocation;
+
     }
     private void Chase()
     {
@@ -84,7 +85,7 @@ public class Employee : Target
             chaseT = transform.DOMove(targetLocation, Speed).SetEase(Ease.Linear).OnComplete(Chase);
 
         }
-           // this.NMA.destination = targetLocation;
+
         
 
         
