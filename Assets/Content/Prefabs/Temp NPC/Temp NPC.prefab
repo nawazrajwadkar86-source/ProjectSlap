@@ -313,7 +313,7 @@ MonoBehaviour:
   bisSlapped: 0
   HeatIncreaseVal: 0.05
   CanChase: 0
-  Speed: 0.2
+  Speed: 0.8
 --- !u!1 &8256331562953699679
 GameObject:
   m_ObjectHideFlags: 0

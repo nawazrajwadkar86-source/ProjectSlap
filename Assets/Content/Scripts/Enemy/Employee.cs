@@ -64,22 +64,22 @@ public class Employee : Target
             if (player == null) return;
             if(col.gameObject == gameObject)
             {
-                return;
+               continue;
             }
             if (col.transform.CompareTag("npc"))
             {
                 separation += (transform.position - col.transform.position).normalized;
             }
-            Vector3 Desired = (player.transform.position - transform.position).normalized + separation * 0.2f;
-            targetLocation = transform.position + Desired;
         }
+            Vector3 Desired = (player.transform.position - transform.position).normalized + separation * 2;
+            targetLocation = transform.position + Desired;
+      //  transform.position = targetLocation;
     }
     private void Chase()
     {
-        Debug.Log($"{name} is chasing");
+            SteeringSeparation();
         if (player) {  
             targetLocation.y = 0.75f;
-            SteeringSeparation();
             chaseT?.Kill(); 
             chaseT = transform.DOMove(targetLocation, Speed).SetEase(Ease.Linear).OnComplete(Chase);
 
