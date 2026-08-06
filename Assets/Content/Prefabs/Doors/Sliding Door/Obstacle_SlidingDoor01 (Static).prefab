@@ -49,16 +49,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4605669358118339839, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4605669358118339839, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3250741175455586629, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -3250741175455586629, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -2818631016347784500, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
       propertyPath: m_Name
       value: Obstacle_SlidingDoor01 (Static)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5385675515949273585, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5385675515949273585, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
       propertyPath: m_IsActive
@@ -71,6 +91,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3748740810843784587}
+    - targetCorrespondingSourceObject: {fileID: -2818631016347784500, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 240690490659878878}
+    - targetCorrespondingSourceObject: {fileID: -3250741175455586629, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1049353535608906638}
+    - targetCorrespondingSourceObject: {fileID: -4605669358118339839, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7714651822424448576}
+    - targetCorrespondingSourceObject: {fileID: 5385675515949273585, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8005426255689853501}
   m_SourcePrefab: {fileID: 100100000, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
 --- !u!1 &2518426189685653445 stripped
 GameObject:
@@ -98,13 +130,103 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5385675515949273585, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
   m_PrefabInstance: {fileID: 3328818282618536596}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &8005426255689853501
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7246175044888499045}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7579833, y: 4.22833, z: 0.05631958}
+  m_Center: {x: 0, y: 2.114165, z: 0.00000043585896}
 --- !u!1 &7937372833476884885 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4605669358118339839, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
   m_PrefabInstance: {fileID: 3328818282618536596}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &7714651822424448576
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937372833476884885}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8248217, y: 4.22833, z: 0.05631958}
+  m_Center: {x: 0, y: 2.114165, z: 0.0000004172325}
+--- !u!1 &8561449069212133464 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2818631016347784500, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
+  m_PrefabInstance: {fileID: 3328818282618536596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &240690490659878878
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8561449069212133464}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6274059880062070182, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
 --- !u!1 &8994069473639408687 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3250741175455586629, guid: e0e2bc87d80a1dc41ab9fd602ff257e6, type: 3}
   m_PrefabInstance: {fileID: 3328818282618536596}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1049353535608906638
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994069473639408687}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7447598, y: 4.22833, z: 0.05631958}
+  m_Center: {x: -0.000000059604645, y: 2.114165, z: 0.00000043585896}
