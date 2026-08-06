@@ -1386,6 +1386,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1136894241}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1136894242}
     - targetCorrespondingSourceObject: {fileID: -3266597287676208925, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 494996958}
@@ -1395,6 +1398,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -3266597287676208925, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 494996961}
+    - targetCorrespondingSourceObject: {fileID: -3266597287676208925, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 494996964}
     - targetCorrespondingSourceObject: {fileID: 4886950539873422166, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 494996954}
@@ -1514,7 +1520,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.4
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &494996960
 MonoBehaviour:
@@ -1542,6 +1548,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slap
   Hand_Bone: {fileID: 494996952}
+--- !u!114 &494996964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494996952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e7311778483584dbe2b89c1d0c880c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Slap_HitBox
+  hitBox: {fileID: 494996958}
 --- !u!1 &519627887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2830,6 +2849,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1136894242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136894240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e7311778483584dbe2b89c1d0c880c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Slap_HitBox
+  hitBox: {fileID: 0}
 --- !u!1 &1169585430
 GameObject:
   m_ObjectHideFlags: 0

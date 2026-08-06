@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 7986247967735541165}
   - component: {fileID: 5819019116565564685}
   - component: {fileID: 7002400611527270402}
-  - component: {fileID: 33871963360692359}
+  - component: {fileID: 2433561956620963297}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: npc
@@ -247,7 +247,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c3c18d3f3299d5145a91fe7de1ad7d16, type: 2}
+  - {fileID: 2100000, guid: 1207ba1ae25b3d6408815467c60e47ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -294,7 +294,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &33871963360692359
+--- !u!114 &2433561956620963297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -303,17 +303,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4848004572636711432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9b11ea281a5c4e4c9800f987fb3843f, type: 3}
+  m_Script: {fileID: 11500000, guid: d858c76cf79fd134db978bcccbc02a19, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Employee
+  m_EditorClassIdentifier: Assembly-CSharp::Intern
   type: 3
-  HeatIncreaseValue: 5
-  MultipleSlapValue: 0.1
+  HeatIncreaseValue: 0.2
+  MultipleSlapValue: 0.2
   animator: {fileID: 6702252974098135021}
   bisSlapped: 0
-  HeatIncreaseVal: 0.05
-  CanChase: 0
-  Speed: 0.8
+  heat_val: 0.01
 --- !u!1 &8256331562953699679
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +323,7 @@ GameObject:
   - component: {fileID: 6888860442362527951}
   - component: {fileID: 6702252974098135021}
   m_Layer: 0
-  m_Name: Temp NPC
+  m_Name: Temp NPC 2
   m_TagString: npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
