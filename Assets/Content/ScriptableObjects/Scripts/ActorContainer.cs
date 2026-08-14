@@ -6,6 +6,15 @@ public class ActorContainer : ScriptableObject
 {
     public List<ActorsData> container;
 
+    public void InitializeNames()
+    {
+
+        // Editor Only
+        foreach(ActorsData d in container)
+        {
+            d. name = d.Category.ToString();
+        }
+    }
     public List<GameObject> GetObjectList(Category category)
     {
         List<GameObject> objList = null;
@@ -85,6 +94,7 @@ public class ActorContainer : ScriptableObject
 [System.Serializable]
 public class ActorsData
 {
+    public string name;
     public Category Category;
     public List<string>PrefabsName;
 }
@@ -102,6 +112,9 @@ public enum Category
     CoinEnemies_Column,
     CoinEnemies_DiagonalRight,
     CoinEnemies_DiagonalLeft,
+    Chair_Ob,
+    Dustbin_Ob,
+    WetCautions_Ob,
     Booster,
     Traps,
     NPC

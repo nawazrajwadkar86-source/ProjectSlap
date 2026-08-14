@@ -16,8 +16,6 @@ public class ActorGenerator : MonoBehaviour
     public List<GameObject> spawnedActors = new List<GameObject>();
     private void Awake()
     {
-        
-        
         objectPooling = ObjectPooling.instance;
     }
     private void Start()
@@ -38,8 +36,7 @@ public class ActorGenerator : MonoBehaviour
             for(int j = 0; j < actorPlacement.PlacementSlots[i].placmenColumns.Length; j++)
             {
                 if(actorPlacement.PlacementSlots[i].placmenColumns[j] == Category.Empty) continue;
-                Debug.Log("Spawning actor at: " + spawnPoints[i].column[j] + " with placement: " + actorPlacement.PlacementSlots[i].placmenColumns[j]);
-                GameObject actor = actorContainer.GetObject(actorPlacement.PlacementSlots[i].placmenColumns[j],spawnPoints[i].column[j]+transform.position,Quaternion.identity);
+                GameObject actor = actorContainer.GetObject(actorPlacement.PlacementSlots[i].placmenColumns[j],spawnPoints[i].column[j]+transform.position+Vector3.up*0.225f,Quaternion.identity);
                 spawnedActors.Add(actor);
             }
         }
@@ -63,7 +60,7 @@ public class ActorGenerator : MonoBehaviour
     {
         foreach (var a in spawnedActors)
         {
-            if (objectPooling != null) objectPooling.StoreObject(a);
+            a.SetActive(false);
         }
         spawnedActors.Clear();
     }
