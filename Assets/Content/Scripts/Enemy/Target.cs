@@ -19,8 +19,8 @@ abstract public class Target : MonoBehaviour
     public float MultipleSlapValue = 0.2f;
     public event Action<ETargetType> onTargetHit;
     public Animator animator;
-
     [HideInInspector] public bool bisSlapped;
+   
     private void OnEnable()
     {
         onTargetHit += ReceiveDamage;

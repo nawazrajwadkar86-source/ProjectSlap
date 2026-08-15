@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float VerticalSpeed = 5;
     [Range(0, 20)]
     public float HorizontalSpeed = 5;
-
+    public bool canRechargeSpeed = false;
     public static PlayerController playerController_Instance;
     private int DirX = 0;
 
@@ -52,13 +52,17 @@ public class PlayerController : MonoBehaviour
         onSwipe -= HandleSwipe;
         
     }
-    private void Start()
+    private void Awake()
     {
-        CC = this.transform.GetComponent<CharacterController>();
-        if(playerController_Instance == null)
+        if (playerController_Instance == null)
         {
             playerController_Instance = this;
         }
+    }
+    private void Start()
+    {
+        CC = this.transform.GetComponent<CharacterController>();
+      
     }
 
     private void Update()
@@ -66,6 +70,7 @@ public class PlayerController : MonoBehaviour
 
         PCmovement();
         Androidmovement();
+        Recharge_Speed();
     }
     public void HorizontalMove(int dir)
     {
@@ -172,6 +177,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Recharge_Speed()
+    {
+        if(VerticalSpeed <= Obstacle_Manager.Instance.Cached_Speed && canRechargeSpeed )
+        {
+            VerticalSpeed = Mathf.Lerp(VerticalSpeed, Obstacle_Manager.Instance.Cached_Speed, 2 * Time.deltaTime);
+        }
+        if(VerticalSpeed >= Obstacle_Manager.Instance.Cached_Speed - 0.2f)
+        {
+            Debug.LogWarning("Vertical speed matched");
+            canRechargeSpeed = false;
+        }
+       
+    }
+    public void Activate_Recharge()
+    {
+        Debug.LogWarning("Activate Rechard");
+        Invoke(nameof(Activate_Recharge_init), 2);
+    }
+    public void Activate_Recharge_init()
+    {
+
+        canRechargeSpeed = true;
+    }
+ 
 }
 
 

@@ -3023,6 +3023,7 @@ GameObject:
   - component: {fileID: 1342341024}
   - component: {fileID: 1342341025}
   - component: {fileID: 1342341026}
+  - component: {fileID: 1342341027}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3062,6 +3063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   VerticalSpeed: 5.5
   HorizontalSpeed: 5.5
+  canRechargeSpeed: 0
   maxSwipeDistance: 10
   SwipeMoveDistance: 2
   currentLane: 2
@@ -3110,6 +3112,20 @@ MonoBehaviour:
   bMultiSlap: 0
   SlapMode: 0
   ESlap_type: 2
+--- !u!114 &1342341027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342341021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b1dd00fb9c1c2949ada0472dafe367d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle_Manager
+  Cached_Speed: 0
+  pc: {fileID: 1342341024}
 --- !u!1 &1343957981
 GameObject:
   m_ObjectHideFlags: 0

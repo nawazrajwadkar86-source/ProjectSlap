@@ -19,11 +19,12 @@ public class Employee : Target
 
     }
     EChaseState chaseState = EChaseState.idle;
+    public SO_Employee SO;
     void Start()
     {
         this.HeatIncreaseValue = HeatIncreaseVal;
         player = GameObject.FindGameObjectWithTag("Player");
-     
+        Speed = 1- SO.Speed;
     }
 
     // Update is called once per frame
