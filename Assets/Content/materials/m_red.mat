@@ -125,7 +125,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     - _circle_smoothness: 0.5
-    - _curve_Amount: 0.0015
+    - _curve_Amount: -0.0015
     - _size: 0
     m_Colors:
     - _BaseColor: {r: 0.745283, g: 0.05273228, b: 0.05273228, a: 1}
