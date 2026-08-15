@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Obstacle_Manager : MonoBehaviour
@@ -8,6 +9,7 @@ public class Obstacle_Manager : MonoBehaviour
     public static Obstacle_Manager Instance;
     public float Cached_Speed;
     public PlayerController pc;
+    public Animator Animator_;
     private void OnEnable()
     {
         OnObstacleHit += pc.Activate_Recharge;
@@ -38,6 +40,7 @@ public class Obstacle_Manager : MonoBehaviour
    
             Cached_Speed = PlayerController.playerController_Instance.VerticalSpeed;
             PlayerController.playerController_Instance.VerticalSpeed /= 2;
+            Animator_.SetTrigger("damage");
             OnObstacleHit?.Invoke();
         }
     }
