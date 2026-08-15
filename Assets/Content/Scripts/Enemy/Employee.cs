@@ -12,13 +12,14 @@ public class Employee : Target
     private GameObject player;
     private Vector3 targetLocation;
     private Tween chaseT;
-    enum EChaseState { 
+    public enum EChaseState { 
     
         idle,
-        chasing
+        chasing,
+        caught
 
     }
-    EChaseState chaseState = EChaseState.idle;
+    public EChaseState chaseState = EChaseState.idle;
     public SO_Employee SO;
     void Start()
     {
@@ -33,6 +34,10 @@ public class Employee : Target
         if(chaseState == EChaseState.chasing)
         {
             Chase();
+        }
+        if(chaseState == EChaseState.caught)
+        {
+            transform.position = transform.position;
         }
     }
     protected override void ReceiveDamage(ETargetType type)
@@ -51,31 +56,40 @@ public class Employee : Target
     }
     protected override void Reaction(ETargetType type)
     {
-        Debug.Log($"{name} was slapped");
+        if(chaseState != EChaseState.caught)
+        {
         this.chaseState = EChaseState.chasing;
+
+        }
    
     }
     protected override void SteeringSeparation()
     {
-        Vector3 separation = Vector3.zero;
-
-        Collider[] cols = Physics.OverlapSphere(transform.position, 1f);
-        foreach(var col in cols)
+        if (chaseState == EChaseState.chasing)
         {
-            if (player == null) return;
-            if(col.gameObject == gameObject)
+            Vector3 separation = Vector3.zero;
+
+            Collider[] cols = Physics.OverlapSphere(transform.position, 1f);
+            foreach (var col in cols)
             {
-               continue;
+                if (player == null) return;
+                if (col.gameObject == gameObject)
+                {
+                    continue;
+                }
+                if (col.transform.CompareTag("npc"))
+                {
+                    separation += (transform.position -
+                        col.transform.position).normalized;
+                }
             }
-            if (col.transform.CompareTag("npc"))
-            {
-                separation += (transform.position -
-                    col.transform.position).normalized;
-            }
-        }
             Vector3 Desired = (player.transform.position - transform.position).normalized + separation * 2;
             targetLocation = transform.position + Desired;
-
+        }
+        else
+        {
+            return;
+        }
     }
     private void Chase()
     {
@@ -85,10 +99,31 @@ public class Employee : Target
             chaseT?.Kill(); 
             chaseT = transform.DOMove(targetLocation, Speed).SetEase(Ease.Linear).OnComplete(Chase);
 
+        }  
+    }
+
+    protected override void CaughtPlayer()
+    {
+        base.CaughtPlayer();
+        Player_Health ph = FindAnyObjectByType<Player_Health>();
+        if (ph)
+        {
+            ph.reduction_amount = 1;
+            ph.Hurt();
+            chaseState = EChaseState.caught;
         }
+        else
+        {
+            Debug.LogError("no PH Found !");
+        }
+    }
 
-        
-
-        
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("Player") && chaseState == EChaseState.chasing)
+        {
+            Debug.Log("player Found killed");
+            CallOnCaughtPlayerEvent();
+        }
     }
 }

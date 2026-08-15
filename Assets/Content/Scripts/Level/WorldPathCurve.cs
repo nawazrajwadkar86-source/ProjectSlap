@@ -75,7 +75,7 @@ public class WorldPathCurve : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 3000, SeeThroughLayer))
         {
-            Debug.Log("Hit: " + hit.transform.name);
+           // Debug.Log("Hit: " + hit.transform.name);
             
 
             hitMeshRenderer = hit.transform.GetComponent<MeshRenderer>();

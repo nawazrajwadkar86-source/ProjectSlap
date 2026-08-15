@@ -17,10 +17,11 @@ abstract public class Target : MonoBehaviour
     public float HeatIncreaseValue = 0.2f;
     [Range(0,1)]
     public float MultipleSlapValue = 0.2f;
-    public event Action<ETargetType> onTargetHit;
     public Animator animator;
     [HideInInspector] public bool bisSlapped;
    
+    public event Action<ETargetType> onTargetHit;
+    public event Action onCaughtPlayer;
     private void OnEnable()
     {
         onTargetHit += ReceiveDamage;
@@ -28,6 +29,9 @@ abstract public class Target : MonoBehaviour
         onTargetHit += UpdateHeatMeter;
         onTargetHit += UpdateMultiSlapMeter;
         onTargetHit += Reaction;
+
+
+        onCaughtPlayer += CaughtPlayer;
  
     }
     private void OnDisable()
@@ -39,11 +43,12 @@ abstract public class Target : MonoBehaviour
         onTargetHit -= UpdateMultiSlapMeter;
         onTargetHit -= Reaction;
 
+        onCaughtPlayer -= CaughtPlayer;
 
     }
     void Start()
     {
-       
+ 
     }
 
     // Update is called once per frame
@@ -86,5 +91,14 @@ abstract public class Target : MonoBehaviour
 
         Debug.Log("Event Called");
         onTargetHit?.Invoke(type);
+    }
+    public void CallOnCaughtPlayerEvent()
+    {
+        onCaughtPlayer?.Invoke();
+     
+    }
+    protected virtual void CaughtPlayer()
+    {
+
     }
 }
