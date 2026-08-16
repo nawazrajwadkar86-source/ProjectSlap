@@ -35,11 +35,14 @@ public class CoinScoreManager : MonoBehaviour
     void Update()
     {
         
+        
+
     }
     void UpdateCoinScore()
     {
         CoinScore ++;
         coinScoreTxt.text =$"{CoinScore}";
+        PlayerPrefs.SetFloat("coin", CoinScore);
     }
     public void EventOnCoinCollected()
     {

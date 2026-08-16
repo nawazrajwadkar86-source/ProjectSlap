@@ -12,6 +12,7 @@ public class Employee : Target
     private GameObject player;
     private Vector3 targetLocation;
     private Tween chaseT;
+    public float Chase_Wait_Time;
     public enum EChaseState { 
     
         idle,
@@ -96,10 +97,14 @@ public class Employee : Target
             SteeringSeparation();
         if (player) {  
             targetLocation.y = 0.75f;
-            chaseT?.Kill(); 
-            chaseT = transform.DOMove(targetLocation, Speed).SetEase(Ease.Linear).OnComplete(Chase);
+            Invoke(nameof( WaitChase), Chase_Wait_Time);
 
         }  
+    }
+    private void WaitChase()
+    {
+        chaseT?.Kill();
+        chaseT = transform.DOMove(targetLocation, Speed).SetEase(Ease.Linear).OnComplete(Chase);
     }
 
     protected override void CaughtPlayer()
