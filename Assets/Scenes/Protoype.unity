@@ -1417,6 +1417,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3266597287676208925, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: -2015854262426404147, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -0.5579786
@@ -1512,6 +1516,10 @@ PrefabInstance:
     - target: {fileID: 4886950539873422166, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886950539873422166, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4896653565443743863, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1952,6 +1960,7 @@ MonoBehaviour:
   - {fileID: 116236578}
   fill_amount: 0.5
   reduction_amount: 0
+  bDead: 0
 --- !u!1 &586362155
 GameObject:
   m_ObjectHideFlags: 0

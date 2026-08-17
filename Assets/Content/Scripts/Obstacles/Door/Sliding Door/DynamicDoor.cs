@@ -24,7 +24,10 @@ public class DynamicDoor : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        CloseDoor();
+        if (other.CompareTag("Player"))
+        {
+            CloseDoor();
+        }
     }
 
     private void openDoor()
