@@ -5,6 +5,9 @@ public class ObstacleHit : MonoBehaviour,IObstacle
 {
     private Vector3 initialPos;
     private Vector3 EndPos;
+    private Quaternion initialAngle;
+    private float EndAngle;
+    private float animSpeed = 8f; 
     public void OnHit(Vector3 hitPos)
     {
         StartCoroutine(StartAnim());
@@ -13,12 +16,18 @@ public class ObstacleHit : MonoBehaviour,IObstacle
     {
         float time = 0;
         initialPos = transform.position;
-        EndPos = transform.position + Vector3.left * 0.5f;
+        float sign = Random.value < 0.5 ? 1:-1;
+        EndPos = transform.position + Vector3.left * 0.5f * sign;
 
-        while (time < 2)
+        initialAngle = transform.rotation;
+        EndAngle = initialAngle.y - 70 * sign;
+
+        while (time < 1)
         {
-            time += Time.deltaTime;
+            time += Time.deltaTime * animSpeed;
             transform.position =Vector3.Lerp(initialPos,EndPos,time);
+
+            transform.rotation = Quaternion.Lerp(initialAngle,Quaternion.Euler(0,EndAngle,0),time);
             yield return null;
         }
     }

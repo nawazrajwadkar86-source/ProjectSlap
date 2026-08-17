@@ -47,19 +47,19 @@ public class ActorContainer : ScriptableObject
         }
         return obj;
     }
-    public GameObject GetObject(Category category,Vector3 position,Quaternion rotation)
+    public string GetObjectName(Category category)
     {
-        GameObject obj = null;
+        string name = "";
 
         foreach(var a in container)
         {
             if(a.Category == category)
             {
-                obj = ObjectPooling.instance.GetObject(a.PrefabsName[0],position,rotation);
+                name = a.PrefabsName[Random.Range(0,a.PrefabsName.Count)];
                 break;
             }
         }
-        return obj;
+        return name;
     }
     public GameObject GetRandomObject(Category category)
     {

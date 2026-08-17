@@ -1,13 +1,19 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DynamicDoor : MonoBehaviour
 {
     int openedDoorIndex;
     private Animator anim;
+    public UnityEvent ResetDamage;
     private void Start()
     {
         anim = GetComponent<Animator>();
+    }
+    private void OnEnable()
+    {
+        ResetDamage?.Invoke();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -41,5 +47,6 @@ public class DynamicDoor : MonoBehaviour
     private void CloseDoor()
     {
         anim.CrossFade("Door Default",1);
+        
     }
 }
