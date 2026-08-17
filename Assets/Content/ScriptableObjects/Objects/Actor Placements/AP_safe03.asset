@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AP_safe03
   m_EditorClassIdentifier: Assembly-CSharp::ActorPlacement
   PlacementSlots:
-  - placmenColumns: 000000000400000000000000
+  - placmenColumns: 000000000000000000000000
   - placmenColumns: 06000000000000000e000000
   - placmenColumns: 02000000000000000e000000
   - placmenColumns: 07000000000000000c000000

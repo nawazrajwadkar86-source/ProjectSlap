@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1523015604682101779}
   - component: {fileID: 3682499207868398450}
   - component: {fileID: -2221745850377152861}
+  - component: {fileID: 4327131745147788420}
   m_Layer: 0
   m_Name: Wet caution board
   m_TagString: obstacle
@@ -112,3 +113,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.88885254, y: 0.985336, z: 0.8793359}
   m_Center: {x: 0.015879214, y: 0.492668, z: 0.024916992}
+--- !u!114 &4327131745147788420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643352569465068027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad201706a5c229d48aadad64806579ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObstacleHit

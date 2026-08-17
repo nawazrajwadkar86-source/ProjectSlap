@@ -14,10 +14,15 @@ public class ActorGenerator : MonoBehaviour
     private const int laneWidthOffset = 2;
     private const int laneLengthOffset = 10;
     public List<GameObject> spawnedActors = new List<GameObject>();
-    private void Awake()
+
+    private void OnEnable()
     {
-        objectPooling = ObjectPooling.instance;
+        if(objectPooling != null)
+        {
+            spawnActors();  
+        }
     }
+
     private void Start()
     {
         Initialize();
@@ -27,22 +32,10 @@ public class ActorGenerator : MonoBehaviour
     {
         ClearSpawnedActors();
     }
-    private void spawnActors()
+        private void Initialize()
     {
-        //Door 
-        
-        for(int i = 0; i < actorPlacement.PlacementSlots.Length; i++)
-        {
-            for(int j = 0; j < actorPlacement.PlacementSlots[i].placmenColumns.Length; j++)
-            {
-                if(actorPlacement.PlacementSlots[i].placmenColumns[j] == Category.Empty) continue;
-                GameObject actor = actorContainer.GetObject(actorPlacement.PlacementSlots[i].placmenColumns[j],spawnPoints[i].column[j]+transform.position+Vector3.up*0.225f,Quaternion.identity);
-                spawnedActors.Add(actor);
-            }
-        }
-    }
-    private void Initialize()
-    {
+        objectPooling = ObjectPooling.instance;
+
         //Spawn points
         for (int i = 1; i < spawnPoints.Length; i++)
         {
@@ -55,6 +48,19 @@ public class ActorGenerator : MonoBehaviour
         //
         actorsPlacementBluprints = Resources.Load<ActorsPlacementBluprint>("Actor Placement Bluprints/ActorsPlacementBluprint");
         actorPlacement = actorsPlacementBluprints.placementList[Random.Range(0, actorsPlacementBluprints.placementList.Count)];
+
+    }
+    private void spawnActors()
+    {
+        for(int i = 0; i < actorPlacement.PlacementSlots.Length; i++)
+        {
+            for(int j = 0; j < actorPlacement.PlacementSlots[i].placmenColumns.Length; j++)
+            {
+                if(actorPlacement.PlacementSlots[i].placmenColumns[j] == Category.Empty) continue;
+                GameObject actor = objectPooling.GetObject(actorContainer.GetObjectName(actorPlacement.PlacementSlots[i].placmenColumns[j]),spawnPoints[i].column[j]+transform.position+Vector3.up*0.225f,Quaternion.identity);
+                spawnedActors.Add(actor);
+            }
+        }
     }
     private void ClearSpawnedActors()
     {
