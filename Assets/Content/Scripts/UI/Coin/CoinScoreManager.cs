@@ -7,6 +7,7 @@ public class CoinScoreManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static CoinScoreManager instance;
     public int CoinScore = 0;
+    public int MaxCoinScore = 0;
     public TextMeshProUGUI coinScoreTxt;
     public event Action OnCoinCollected;
     private void Awake()
@@ -19,7 +20,7 @@ public class CoinScoreManager : MonoBehaviour
     void Start()
     {
         coinScoreTxt.text = $"{CoinScore}";
-       
+        MaxCoinScore = PlayerPrefs.GetInt("max_coin_score");
     }
 
     private void OnEnable()
@@ -42,7 +43,14 @@ public class CoinScoreManager : MonoBehaviour
     {
         CoinScore ++;
         coinScoreTxt.text =$"{CoinScore}";
-        PlayerPrefs.SetFloat("coin", CoinScore);
+        PlayerPrefs.SetInt("coin", CoinScore);
+
+        if(CoinScore > MaxCoinScore)
+        {
+            MaxCoinScore = CoinScore;
+            PlayerPrefs.SetInt("max_coin_score", CoinScore);
+            PlayerPrefs.Save();
+        }
     }
     public void EventOnCoinCollected()
     {

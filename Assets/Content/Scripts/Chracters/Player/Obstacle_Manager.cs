@@ -1,8 +1,4 @@
 using System;
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 using UnityEngine;
 
 public class Obstacle_Manager : MonoBehaviour
