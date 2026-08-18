@@ -22,7 +22,7 @@ public class Player_Health : MonoBehaviour
         bDead = deathCheck();
         if (bDead)
         {
-            GameOver();
+            LevelManager.Instance.GameOver();
         }
     }
 
@@ -55,8 +55,5 @@ public class Player_Health : MonoBehaviour
 
     }
 
-    public void GameOver()
-    {
-        Time.timeScale = 0;
-    }
+  
 }
