@@ -4,6 +4,7 @@ public class Slap: MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject Hand_Bone;
+
     void Start()
     {
         
@@ -25,9 +26,16 @@ public class Slap: MonoBehaviour
     }
     void SingeleSlap(Collider other)
     {
-                    Target target =  other.transform.GetComponent<Target>();
-                target?.CallOnHitTargetEvent(target.type);
-            Debug.LogWarning("Trigger SLAPPEDDDDDDDDD !");
+
+       Target target =  other.transform.GetComponent<Target>();
+        if (!target.bisSlapped)
+        {
+           // SlapCounter.Instance.EventOnSlap();
+          //  target?.CallOnHitTargetEvent(target.type);
+           
+        }
+    
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,4 +55,6 @@ public class Slap: MonoBehaviour
             }
         }
     }
+
+
 }

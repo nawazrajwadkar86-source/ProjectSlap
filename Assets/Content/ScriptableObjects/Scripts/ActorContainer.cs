@@ -1,11 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Actors", menuName = "Scriptable Objects/ActorObjects/ActorsContainer")]
+[CreateAssetMenu(fileName = "Actors", menuName = "Scriptable Objects/Actors/ActorsContainer")]
 public class ActorContainer : ScriptableObject
 {
     public List<ActorsData> container;
 
+    public void InitializeNames()
+    {
+
+        // Editor Only
+        foreach(ActorsData d in container)
+        {
+            d. name = d.Category.ToString();
+        }
+    }
     public List<GameObject> GetObjectList(Category category)
     {
         List<GameObject> objList = null;
@@ -24,6 +33,34 @@ public class ActorContainer : ScriptableObject
 
         return objList;
     }
+    public GameObject GetObject(Category category)
+    {
+        GameObject obj = null;
+
+        foreach(var a in container)
+        {
+            if(a.Category == category)
+            {
+                obj = ObjectPooling.instance.GetObject(a.PrefabsName[0],Vector3.zero,Quaternion.identity);
+                break;
+            }
+        }
+        return obj;
+    }
+    public string GetObjectName(Category category)
+    {
+        string name = "";
+
+        foreach(var a in container)
+        {
+            if(a.Category == category)
+            {
+                name = a.PrefabsName[Random.Range(0,a.PrefabsName.Count)];
+                break;
+            }
+        }
+        return name;
+    }
     public GameObject GetRandomObject(Category category)
     {
         GameObject obj = null;
@@ -38,6 +75,7 @@ public class ActorContainer : ScriptableObject
         }
         return obj;
     }
+    
     public GameObject GetRandomObject(Category category,Vector3 position,Quaternion rotation)
     {
         GameObject obj = null;
@@ -56,12 +94,27 @@ public class ActorContainer : ScriptableObject
 [System.Serializable]
 public class ActorsData
 {
+    public string name;
     public Category Category;
     public List<string>PrefabsName;
 }
 public enum Category
 {
+    Empty,
     Door,
+    coins,
+    coins_DiagonalRight,
+    coins_DiagonalLeft,
+    Enemy,
+    Enemies_Column,
+    Enemies_DiagonalRight,
+    Enemies_DiagonalLeft,
+    CoinEnemies_Column,
+    CoinEnemies_DiagonalRight,
+    CoinEnemies_DiagonalLeft,
+    Chair_Ob,
+    Dustbin_Ob,
+    WetCautions_Ob,
     Booster,
     Traps,
     NPC

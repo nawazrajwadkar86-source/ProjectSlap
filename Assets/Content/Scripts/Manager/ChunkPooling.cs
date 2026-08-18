@@ -64,9 +64,9 @@ public class ChunkPooling : MonoBehaviour
         {
             if (!g.activeInHierarchy)
             {
-                g.SetActive(true);
                 g.transform.position = position;
                 g.transform.rotation = rotation;
+                g.SetActive(true);
                 return g;
             }
         }

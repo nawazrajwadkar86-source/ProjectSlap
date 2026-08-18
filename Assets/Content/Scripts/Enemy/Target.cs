@@ -14,19 +14,24 @@ abstract public class Target : MonoBehaviour
     }
     public ETargetType type = ETargetType.employee;
     [Range(0,20)]
-    public float HeatIncreaseValue = 5;
+    public float HeatIncreaseValue = 0.2f;
     [Range(0,1)]
     public float MultipleSlapValue = 0.2f;
-    public event Action<ETargetType> onTargetHit;
     public Animator animator;
-
     [HideInInspector] public bool bisSlapped;
+   
+    public event Action<ETargetType> onTargetHit;
+    public event Action onCaughtPlayer;
     private void OnEnable()
     {
         onTargetHit += ReceiveDamage;
         onTargetHit += UpdateScore;
         onTargetHit += UpdateHeatMeter;
         onTargetHit += UpdateMultiSlapMeter;
+        onTargetHit += Reaction;
+
+
+        onCaughtPlayer += CaughtPlayer;
  
     }
     private void OnDisable()
@@ -36,12 +41,14 @@ abstract public class Target : MonoBehaviour
         onTargetHit -= UpdateScore;
         onTargetHit -= UpdateHeatMeter;
         onTargetHit -= UpdateMultiSlapMeter;
+        onTargetHit -= Reaction;
 
+        onCaughtPlayer -= CaughtPlayer;
 
     }
     void Start()
     {
-       
+ 
     }
 
     // Update is called once per frame
@@ -63,16 +70,35 @@ abstract public class Target : MonoBehaviour
     protected virtual void UpdateHeatMeter(ETargetType type)
     {
         Debug.Log("update Score");
+    
+
     }
 
     protected virtual void UpdateMultiSlapMeter(ETargetType type)
     {
         Debug.Log("update MultiSlap");
     }
+    protected virtual void Reaction(ETargetType type)
+    {
+       
+    }
+    protected virtual void SteeringSeparation()
+    {
 
+    }
     public void CallOnHitTargetEvent(ETargetType type)
     {
+
         Debug.Log("Event Called");
         onTargetHit?.Invoke(type);
+    }
+    public void CallOnCaughtPlayerEvent()
+    {
+        onCaughtPlayer?.Invoke();
+     
+    }
+    protected virtual void CaughtPlayer()
+    {
+
     }
 }

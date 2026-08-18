@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2580343732356931145}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.654, z: 3.7}
+  m_LocalPosition: {x: 0, y: 0.5, z: 3.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e9752666dcd8a34409a3e4d45c03b686, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8562b7c93087d9645a6adfa68b248939, type: 2}
     - target: {fileID: 919132149155446097, guid: e9752666dcd8a34409a3e4d45c03b686, type: 3}
       propertyPath: m_Name
       value: Coin

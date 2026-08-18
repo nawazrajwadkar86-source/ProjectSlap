@@ -13,7 +13,60 @@ MonoBehaviour:
   m_Name: Safe chunk AC
   m_EditorClassIdentifier: Assembly-CSharp::ActorContainer
   container:
-  - Category: 0
+  - name: Door
+    Category: 1
     PrefabsName:
     - safe_static Door
     - safe_Dynamic Door
+  - name: coins
+    Category: 2
+    PrefabsName:
+    - safe_Coin column
+  - name: coins_DiagonalRight
+    Category: 3
+    PrefabsName:
+    - safe_Coin column diagonal right
+  - name: coins_DiagonalLeft
+    Category: 4
+    PrefabsName:
+    - safe_Coin column diagonal left
+  - name: Enemy
+    Category: 5
+    PrefabsName:
+    - safe_Enemy Pair
+  - name: Enemies_Column
+    Category: 6
+    PrefabsName:
+    - safe_Enemy Pair Coumn
+  - name: Enemies_DiagonalLeft
+    Category: 8
+    PrefabsName:
+    - safe_Enemy Pair Coumn left
+  - name: Enemies_DiagonalRight
+    Category: 7
+    PrefabsName:
+    - safe_Enemy Pair Coumn right
+  - name: CoinEnemies_Column
+    Category: 9
+    PrefabsName:
+    - safe_ Coin Enemy Pair Coumn
+  - name: CoinEnemies_DiagonalRight
+    Category: 10
+    PrefabsName:
+    - safe_ Coin Enemy Pair Coumn right
+  - name: CoinEnemies_DiagonalLeft
+    Category: 11
+    PrefabsName:
+    - safe_ Coin Enemy Pair Coumn left
+  - name: CoinEnemies_DiagonalLeft
+    Category: 12
+    PrefabsName:
+    - Chair_Ob
+  - name: CoinEnemies_DiagonalLeft
+    Category: 13
+    PrefabsName:
+    - Dustbin_Ob
+  - name: CoinEnemies_DiagonalLeft
+    Category: 14
+    PrefabsName:
+    - Wet Cautions_Ob

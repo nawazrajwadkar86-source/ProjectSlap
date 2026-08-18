@@ -6,15 +6,16 @@ TagManager:
   tags:
   - CinemachineTarget
   - npc
+  - obstacle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Obstacle
+  - ignoreObstacle
   - 
   - 
   - 
