@@ -1949,6 +1949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinScoreManager
   CoinScore: 0
+  MaxCoinScore: 0
   coinScoreTxt: {fileID: 2139912635}
 --- !u!1 &806054127
 GameObject:
