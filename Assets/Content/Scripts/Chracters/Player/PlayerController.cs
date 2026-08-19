@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float LaneSwitchSpeed = 0.5f;
     Vector2 startpos = Vector2.zero;
     Vector2 endpos = Vector2.zero;
+    private float TargetMoveX;
     //--------------------------------------- Movement Mode Enum --------------------------------------------------------
     public enum EMovementMode
     {
@@ -62,15 +63,20 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         CC = this.transform.GetComponent<CharacterController>();
-      
+        TargetMoveX = transform.position.x;
     }
 
     private void Update()
     {
 
-        PCmovement();
+       // PCmovement();
         Androidmovement();
         Recharge_Speed();
+
+        float newX = Mathf.MoveTowards(transform.position.x,TargetMoveX,VerticalSpeed * Time.deltaTime);
+        CC?.Move(new Vector3(newX - transform.position.x, 0,VerticalSpeed * Time.deltaTime ));
+
+      
     }
     public void HorizontalMove(int dir)
     {
@@ -78,14 +84,18 @@ public class PlayerController : MonoBehaviour
     }
     void PCmovement()
     {
-        float fwd_Dir = 1;
-        float right = Input.GetAxis("Horizontal") * HorizontalSpeed;
-        float forward = fwd_Dir * VerticalSpeed ;
-        Vector3 DesiredMoveDir = new Vector3(right, 0, forward);
-        CC?.Move(DesiredMoveDir * Time.deltaTime);
+              float fwd_Dir = 1;
+              float right = Input.GetAxis("Horizontal") * HorizontalSpeed;
+              float forward = fwd_Dir * VerticalSpeed ;
+              Vector3 DesiredMoveDir = new Vector3(right, 0, forward);
+              CC?.Move(DesiredMoveDir * Time.deltaTime);
+              //transform.DOMoveZ(forward,VerticalSpeed * Time.deltaTime);
+     
     }
     void Androidmovement()
     {
+
+
         switch (movementMode) {
         case EMovementMode.tap:
                 float fwd_Dir = 1;
@@ -163,8 +173,10 @@ public class PlayerController : MonoBehaviour
         {
 
             float TargetLocation =transform.position.x + SwipeMoveDistance * 1;
-            transform.DOMoveX(TargetLocation, LaneSwitchSpeed);
+           //  transform.DOMoveX(TargetLocation, LaneSwitchSpeed);
             currentLane += 1;
+            TargetMoveX += SwipeMoveDistance;
+
         }
     }
     private void SwitchLaneLeft()
@@ -172,8 +184,9 @@ public class PlayerController : MonoBehaviour
         if (currentLane == 2 || currentLane ==3)
         {
             float TargetLocation =transform.position.x + SwipeMoveDistance * -1;
-            transform.DOMoveX(TargetLocation, LaneSwitchSpeed);
+          //  transform.DOMoveX(TargetLocation, LaneSwitchSpeed);
             currentLane -= 1;
+            TargetMoveX -= SwipeMoveDistance;
         }
     }
 
