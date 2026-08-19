@@ -21,6 +21,7 @@ public class Slap: MonoBehaviour
         foreach (var col in cols)
         {
             col.GetComponent<Target>().CallOnHitTargetEvent(col.GetComponent<Target>().type);
+           // col.GetComponent<Target>().SetSpeed(PlayerController.playerController_Instance.VerticalSpeed - 1);
             Debug.LogWarning("MultiSlap SLAPPEDDDDDDDDD !");
         }
     }

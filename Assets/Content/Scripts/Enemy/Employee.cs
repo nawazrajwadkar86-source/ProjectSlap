@@ -131,4 +131,9 @@ public class Employee : Target
             CallOnCaughtPlayerEvent();
         }
     }
+
+    public  override void SetSpeed(float new_speed)
+    {
+        Speed = new_speed;
+    }
 }

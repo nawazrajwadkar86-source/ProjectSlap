@@ -91,6 +91,7 @@ abstract public class Target : MonoBehaviour
 
         Debug.Log("Event Called");
         onTargetHit?.Invoke(type);
+        
     }
     public void CallOnCaughtPlayerEvent()
     {
@@ -100,5 +101,10 @@ abstract public class Target : MonoBehaviour
     protected virtual void CaughtPlayer()
     {
 
+    }
+
+    public virtual void SetSpeed(float new_speed)
+    {
+        
     }
 }
