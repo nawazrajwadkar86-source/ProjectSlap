@@ -91,6 +91,7 @@ abstract public class Target : MonoBehaviour
 
         Debug.Log("Event Called");
         onTargetHit?.Invoke(type);
+        
     }
     public void CallOnCaughtPlayerEvent()
     {
