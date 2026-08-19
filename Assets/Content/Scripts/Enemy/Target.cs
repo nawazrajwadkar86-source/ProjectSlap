@@ -101,4 +101,9 @@ abstract public class Target : MonoBehaviour
     {
 
     }
+
+    public virtual void SetSpeed(float new_speed)
+    {
+        
+    }
 }

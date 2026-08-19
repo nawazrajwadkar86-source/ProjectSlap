@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
        // PCmovement();
         Androidmovement();
-        Recharge_Speed();
+        //Recharge_Speed();
 
         float newX = Mathf.MoveTowards(transform.position.x,TargetMoveX,VerticalSpeed * Time.deltaTime);
         CC?.Move(new Vector3(newX - transform.position.x, 0,VerticalSpeed * Time.deltaTime ));
@@ -205,13 +205,14 @@ public class PlayerController : MonoBehaviour
     }
     public void Activate_Recharge()
     {
-        Debug.LogWarning("Activate Rechard");
+        canRechargeSpeed = true;
+        VerticalSpeed = 2;
         Invoke(nameof(Activate_Recharge_init), 2);
     }
     public void Activate_Recharge_init()
     {
 
-        canRechargeSpeed = true;
+        canRechargeSpeed = false;
     }
  
 }

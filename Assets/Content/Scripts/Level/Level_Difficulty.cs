@@ -37,6 +37,11 @@ public class Level_Difficulty : MonoBehaviour
         PlayerPrefs.Save();
 
         }
+        if (!PlayerController.playerController_Instance.canRechargeSpeed)
+        {
 
+        float TargetSpeed = Mathf.Lerp(5, 15, Mathf.InverseLerp(0, 1000, Distance_Travelled));
+        PlayerController.playerController_Instance.VerticalSpeed = TargetSpeed;
+        }
     }
 }

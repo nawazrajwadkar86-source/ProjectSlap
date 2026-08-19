@@ -30,6 +30,7 @@ public class Obstacle_Manager : MonoBehaviour
             Cached_Speed = PlayerController.playerController_Instance.VerticalSpeed;
             PlayerController.playerController_Instance.VerticalSpeed /= 2;
             ph.reduction_amount = 0.5f;
+
             Animator_.SetTrigger("damage");
 
             OnObstacleHit?.Invoke();
