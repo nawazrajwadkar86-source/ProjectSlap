@@ -121,7 +121,16 @@ public class PlayerController : MonoBehaviour
                     {
                         endpos = touch.position;
                        Vector2 delta = (endpos - startpos);
-                 
+                      
+
+                        if(delta.y > 200)
+                        {
+                           
+
+                            Jump();
+                      
+                        }
+
                         onSwipe?.Invoke(delta);
 
                     }
@@ -132,7 +141,10 @@ public class PlayerController : MonoBehaviour
         
 
     }
-
+    void Jump()
+    {
+        Debug.LogWarning("JUMP!");
+    }
     void HandleSwipe(Vector2 delta)
     {
         if(Mathf.Abs(delta.x) < Mathf.Abs(delta.y))
@@ -143,7 +155,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
+      
         if(delta.x < -maxSwipeDistance)
         {
             swipe = ESwipe.left;
