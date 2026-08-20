@@ -3662,7 +3662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253b24bad65b6a2499d781e8055ba3c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  VerticalSpeed: 8
+  VerticalSpeed: 5
   HorizontalSpeed: 5.5
   canRechargeSpeed: 0
   maxSwipeDistance: 10

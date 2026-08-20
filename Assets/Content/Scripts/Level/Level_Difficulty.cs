@@ -40,7 +40,7 @@ public class Level_Difficulty : MonoBehaviour
         if (!PlayerController.playerController_Instance.canRechargeSpeed)
         {
 
-        float TargetSpeed = Mathf.Lerp(8, 27, Mathf.InverseLerp(0, 1000, Distance_Travelled));
+        float TargetSpeed = Mathf.Lerp(5, 15, Mathf.InverseLerp(0, 1000, Distance_Travelled));
         PlayerController.playerController_Instance.VerticalSpeed = TargetSpeed;
         }
     }
