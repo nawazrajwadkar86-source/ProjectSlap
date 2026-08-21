@@ -156,7 +156,7 @@ MonoBehaviour:
   - chunkType: 3
   - chunkType: 4
   - chunkType: 5
-  currentChunkLength: 60
+  previousChunkLength: 0
 --- !u!4 &21803763
 Transform:
   m_ObjectHideFlags: 0
@@ -1731,7 +1731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e7311778483584dbe2b89c1d0c880c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slap_HitBox
-  hitBox: {fileID: 494996958}
+  hitBox: {fileID: 0}
 --- !u!1 &519627887
 GameObject:
   m_ObjectHideFlags: 0
