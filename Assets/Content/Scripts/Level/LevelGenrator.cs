@@ -1,5 +1,6 @@
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
@@ -8,15 +9,19 @@ public class LevelGenrator : MonoBehaviour
     public Transform Player;
     public List<Chunk> chunks;
     private Queue<GameObject> chunksQueue = new Queue<GameObject>();
-    public const int chunkLength = 60;
-    ChunkPooling objectPooling;
+    public float previousChunkLength;
+    ChunkPooling ChunkPooling;
+
+    //Important
     private int currentGenChunkIndex;
+    private float currentChunkbasePos; // Y
+    private float nextChunkPosZ;
     private int currentCreateIndex = 1;
-    private int nextChunkGenCallPos;
+    private float nextChunkGenCallPos;
 
     private void Start()
     {
-        objectPooling = ChunkPooling.instance;
+        ChunkPooling = ChunkPooling.instance;
         GenrateStartingChunk();
 
         InitializeDebugging();
@@ -32,9 +37,9 @@ public class LevelGenrator : MonoBehaviour
             GenerateChunk();     
 
             //initial chunk
-            objectPooling.StoreObject(chunksQueue.Dequeue());
+            ChunkPooling.StoreObject(chunksQueue.Dequeue());
 
-            nextChunkGenCallPos = currentCreateIndex * chunkLength;
+            nextChunkGenCallPos = currentCreateIndex * previousChunkLength;
 
             currentChunkIndex.text = "Current Chunk: " + currentCreateIndex.ToString();
             currentCreateIndex++;
@@ -43,51 +48,64 @@ public class LevelGenrator : MonoBehaviour
     private void GenrateStartingChunk()
     {
         //genrate starting 5 chunks;
-        GameObject newChunk = objectPooling.GetObject(poolObject.safe, Vector3.zero, Quaternion.identity);
+        GameObject newChunk = ChunkPooling.GetObject(ChunkPooling.GetChunkProperty(ChunkType.safe), Vector3.zero, Quaternion.identity);
 
         chunksQueue.Enqueue(newChunk);
         currentCreateIndex++;
         currentGenChunkIndex++;
+
+        previousChunkLength = 60;
+        nextChunkPosZ = 60;
 
         for(int i = 0;i < 8; i++)
         {
             GenerateChunk();
         }
 
-        nextChunkGenCallPos = currentCreateIndex * chunkLength;
+        nextChunkGenCallPos = previousChunkLength * currentCreateIndex;
         currentCreateIndex++;
     }
     private void GenerateChunk()
     {
         //int RandomChunk = Random.Range(0, chunks.Count);
-        int RandomChunk = 0;
+        int [] tempIndex = {0,5};
+        int RandomChunk = tempIndex[Random.Range(0,tempIndex.Length)];
         Chunk chunk = chunks[RandomChunk];
-        GameObject newChunk = null;
-        Vector3 nextChunkPosition = new Vector3(0, 0, currentGenChunkIndex * chunkLength);
+        GameObject newChunk;
+        ChunkProperty newChunkProperty = null;
 
         switch (chunk.chunkType)
         {
             case ChunkType.safe:
-                newChunk = objectPooling.GetObject(poolObject.safe, nextChunkPosition, Quaternion.identity);
+                newChunkProperty = ChunkPooling.GetChunkProperty(ChunkType.safe);
                 break;
             case ChunkType.crowd:
-                newChunk = objectPooling.GetObject(poolObject.crowd, nextChunkPosition, Quaternion.identity);
+                newChunkProperty = ChunkPooling.GetChunkProperty(ChunkType.crowd);
                 break;
             case ChunkType.hazard:
-                newChunk = objectPooling.GetObject(poolObject.hazard, nextChunkPosition, Quaternion.identity);
+                newChunkProperty = ChunkPooling.GetChunkProperty(ChunkType.hazard);
                 break;
             case ChunkType.mixed:
-                newChunk = objectPooling.GetObject(poolObject.mixed, nextChunkPosition, Quaternion.identity);
+                newChunkProperty = ChunkPooling.GetChunkProperty(ChunkType.mixed);
                 break;
             case ChunkType.event_:
-                newChunk = objectPooling.GetObject(poolObject.event_, nextChunkPosition, Quaternion.identity);
+                newChunkProperty = ChunkPooling.GetChunkProperty(ChunkType.event_);
                 break;
             case ChunkType.transition:
-                newChunk = objectPooling.GetObject(poolObject.transition, nextChunkPosition, Quaternion.identity);
+                newChunkProperty = ChunkPooling.GetChunkProperty(ChunkType.transition);
                 break;
         }
+        
+
+        Vector3 nextChunkPosition = new Vector3(0, currentChunkbasePos, nextChunkPosZ);
+        newChunk = ChunkPooling.GetObject(newChunkProperty, nextChunkPosition, Quaternion.identity);
+
+        currentChunkbasePos += newChunkProperty.YTranslation;
+        previousChunkLength = newChunkProperty.chunkLength;
+        nextChunkPosZ += newChunkProperty.chunkLength;
 
         chunksQueue.Enqueue(newChunk);
+        
         currentGenChunkIndex++;
     }
 
@@ -113,7 +131,6 @@ public class LevelGenrator : MonoBehaviour
         return textMesh;
     }
 }
-
 [System.Serializable]
 public class Chunk
 {
@@ -127,5 +144,5 @@ public enum ChunkType
     hazard,
     mixed,
     event_,
-    transition
+    transition,
 }

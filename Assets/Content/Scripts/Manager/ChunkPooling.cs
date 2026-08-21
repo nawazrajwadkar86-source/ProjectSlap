@@ -4,20 +4,9 @@ using System.Collections;
 
 public class ChunkPooling : MonoBehaviour
 {
-   
     #region Singleton
-
     public static ChunkPooling instance;
-
     #endregion
-    [System.Serializable]
-    public class pool
-    {
-        public poolObject poolObject;
-        public List<GameObject> prefab;
-        public int size;
-    }
-
     public List<pool> pools;
     public Dictionary<string, List<GameObject>> poolDictionary;
 
@@ -38,29 +27,27 @@ public class ChunkPooling : MonoBehaviour
 
         foreach (pool pool in pools)
         {
-            List<GameObject> objectPool = new List<GameObject>();
-            for (int i = 0; i < pool.size; i++)
+            for (int j = 0; j < pool.chunkPropertiesList.Count; j++)
             {
-                for (int j = 0; j < pool.prefab.Count;j++)
+                List<GameObject> objectPool = new List<GameObject>();
+                for (int i = 0; i < pool.size; i++)
                 {
-                    GameObject g = Instantiate(pool.prefab[j],transform);
+                    GameObject g = Instantiate(pool.chunkPropertiesList[j].chunkPrefab, transform);
                     g.SetActive(false);
                     objectPool.Add(g);
+                    
                 }
+                poolDictionary.Add(pool.chunkPropertiesList[j].name, objectPool);
+
             }
-            poolDictionary.Add(pool.poolObject.ToString(), objectPool);
         }
     }
-    public GameObject GetObject(poolObject poolObject,Vector3 position,Quaternion rotation)
+    public GameObject GetObject(ChunkProperty chunkProperty, Vector3 position, Quaternion rotation)
     {
-        if (!poolDictionary.ContainsKey(poolObject.ToString()))
-        {
-            Debug.LogWarning("Pool with name " + poolObject.ToString() + " does not exist");
-        }
 
-        List<GameObject> objectPool = poolDictionary[poolObject.ToString()];
+        List<GameObject> objectPool = poolDictionary[chunkProperty.name];
 
-        foreach (GameObject g in objectPool)
+        foreach (var g in objectPool)
         {
             if (!g.activeInHierarchy)
             {
@@ -70,29 +57,52 @@ public class ChunkPooling : MonoBehaviour
                 return g;
             }
         }
-        
         return null;
+    }
+    public ChunkProperty GetChunkProperty(ChunkType ChunkType)
+    {
+        ChunkProperty newChunkProperty = null;
+        if (!poolDictionary.ContainsKey(ChunkType.ToString()))
+        {
+            Debug.LogWarning("Pool with name " + ChunkType.ToString() + " does not exist");
+        }
+
+        foreach (var p in pools)
+        {
+            if (p.ChunkType == ChunkType)
+            {
+                Debug.Log(p.chunkPropertiesList.Count);
+                newChunkProperty = p.chunkPropertiesList[Random.Range(0, p.chunkPropertiesList.Count)];
+            }
+        }
+
+        if (newChunkProperty == null)
+        {
+            Debug.LogError("chunk property null");
+        }
+        return newChunkProperty;
     }
     public void StoreObject(GameObject enemy)
     {
         enemy.SetActive(false);
     }
-    public void StoreObject(GameObject enemy,float delay)
+    public void StoreObject(GameObject enemy, float delay)
     {
-        StartCoroutine(StoreObjectCoroutine(enemy,delay));
+        StartCoroutine(StoreObjectCoroutine(enemy, delay));
     }
-    IEnumerator StoreObjectCoroutine(GameObject enemy,float delay)
+    IEnumerator StoreObjectCoroutine(GameObject enemy, float delay)
     {
         yield return new WaitForSeconds(delay);
         enemy.SetActive(false);
     }
+
+    [System.Serializable]
+    public class pool
+    {
+        public ChunkType ChunkType;
+        public List<ChunkProperty> chunkPropertiesList = new List<ChunkProperty>();
+        public int size;
+    }
+
 }
-public enum poolObject
-{
-    safe,
-    crowd,
-    hazard,
-    mixed,
-    event_,
-    transition
-}
+
