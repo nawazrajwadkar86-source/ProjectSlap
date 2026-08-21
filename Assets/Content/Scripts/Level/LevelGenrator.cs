@@ -13,10 +13,9 @@ public class LevelGenrator : MonoBehaviour
     ChunkPooling ChunkPooling;
 
     //Important
-    private int currentGenChunkIndex;
     private float currentChunkbasePos; // Y
     private float nextChunkPosZ;
-    private int currentCreateIndex = 1;
+    
     private float nextChunkGenCallPos;
 
     private void Start()
@@ -39,10 +38,9 @@ public class LevelGenrator : MonoBehaviour
             //initial chunk
             ChunkPooling.StoreObject(chunksQueue.Dequeue());
 
-            nextChunkGenCallPos = currentCreateIndex * previousChunkLength;
+            nextChunkGenCallPos += previousChunkLength;
 
-            currentChunkIndex.text = "Current Chunk: " + currentCreateIndex.ToString();
-            currentCreateIndex++;
+            //currentChunkIndex.text = "Current Chunk: " + currentCreateIndex.ToString();
         }
     }
     private void GenrateStartingChunk()
@@ -51,19 +49,16 @@ public class LevelGenrator : MonoBehaviour
         GameObject newChunk = ChunkPooling.GetObject(ChunkPooling.GetChunkProperty(ChunkType.safe), Vector3.zero, Quaternion.identity);
 
         chunksQueue.Enqueue(newChunk);
-        currentCreateIndex++;
-        currentGenChunkIndex++;
 
         previousChunkLength = 60;
         nextChunkPosZ = 60;
 
-        for(int i = 0;i < 8; i++)
+        for(int i = 0;i < 15; i++)
         {
             GenerateChunk();
         }
 
-        nextChunkGenCallPos = previousChunkLength * currentCreateIndex;
-        currentCreateIndex++;
+        nextChunkGenCallPos = 360;
     }
     private void GenerateChunk()
     {
@@ -105,8 +100,7 @@ public class LevelGenrator : MonoBehaviour
         nextChunkPosZ += newChunkProperty.chunkLength;
 
         chunksQueue.Enqueue(newChunk);
-        
-        currentGenChunkIndex++;
+    
     }
 
         //Debugging

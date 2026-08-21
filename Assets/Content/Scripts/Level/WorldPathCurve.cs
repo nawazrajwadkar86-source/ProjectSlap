@@ -22,7 +22,6 @@ public class WorldPathCurve : MonoBehaviour
     public float CurveChangeSpeed = 0.0001f;
 
     float _time;
-    float CoTime = 0;
     private float nextCurvetUpdateTime;
 
     private void Start()
@@ -32,7 +31,7 @@ public class WorldPathCurve : MonoBehaviour
 
         foreach (var m in assetReference.worldCurveMaterial)
         {
-            m.SetVector("_curve_Amount", Vector2.zero);
+            m.SetVector("_curve_Amount", curveVec);
         }
 
         nextCurvetUpdateTime = _time + 4;
@@ -49,16 +48,18 @@ public class WorldPathCurve : MonoBehaviour
     }
     IEnumerator ChangeInPath()
     {
-        float endTime = CoTime + 4;
-        while (CoTime < endTime)
+        float CoTime = 0;
+
+        float x = Random.Range(0.0f,1.0f) > 0.5f?-1:1;
+        float y = Random.Range(0.0f,1.0f) > 0.5f?-1:1;
+
+        Vector2 initialPos = curveVec;
+        Vector2 targetPos = new Vector2(x * 0.0015f, y * 0.00075f);
+        while (CoTime < 1)
         {
-            CoTime += Time.deltaTime;
-            float pTIme = CoTime * 0.085f;
-            float x = Mathf.Lerp(-1, 1, Mathf.PerlinNoise(pTIme + 25, pTIme + 50));
-            float y = Mathf.Lerp(-1, 1, Mathf.PerlinNoise(pTIme + 75, pTIme));
-            
-            
-            curveVec = new Vector2(x * 0.0025f, y * 0.00075f);
+            CoTime += Time.deltaTime * .75f;
+
+            curveVec = Vector2.Lerp(initialPos,targetPos,CoTime);
 
             foreach (var m in assetReference.worldCurveMaterial)
             {

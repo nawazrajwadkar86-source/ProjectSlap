@@ -5,7 +5,7 @@ using DG.Tweening;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-     CharacterController CC { get;set; }
+    CharacterController CC { get; set; }
     [Range(0, 20)]
     public float VerticalSpeed = 5;
     [Range(0, 20)]
@@ -13,6 +13,11 @@ public class PlayerController : MonoBehaviour
     public bool canRechargeSpeed = false;
     public static PlayerController playerController_Instance;
     private int DirX = 0;
+    private Vector3 DesiredMoveDir;
+    private bool isGrounded;
+    public LayerMask groundLayer;
+    public Transform groundCheckT;
+    private float gForce;
 
     //-----------------------------------Swiping-----------------------------------------------
     [Space(20)]
@@ -20,9 +25,9 @@ public class PlayerController : MonoBehaviour
 
     public float maxSwipeDistance = 500f;
     public float SwipeMoveDistance = 0.5f;
-    event Action<Vector2> onSwipe ;
+    event Action<Vector2> onSwipe;
     public int currentLane = 2;
-    [Range(0.1f,1f)]
+    [Range(0.1f, 1f)]
     public float LaneSwitchSpeed = 0.5f;
     Vector2 startpos = Vector2.zero;
     Vector2 endpos = Vector2.zero;
@@ -32,7 +37,8 @@ public class PlayerController : MonoBehaviour
         tap,
         swipe
 
-    }public EMovementMode movementMode = EMovementMode.swipe;
+    }
+    public EMovementMode movementMode = EMovementMode.swipe;
 
     //--------------------------------------- Movement Mode Enum --------------------------------------------------------
     public enum ESwipe
@@ -42,7 +48,8 @@ public class PlayerController : MonoBehaviour
         left,
         up,
         down
-    }ESwipe swipe = ESwipe.none;
+    }
+    ESwipe swipe = ESwipe.none;
     private void OnEnable()
     {
         onSwipe += HandleSwipe;
@@ -50,7 +57,7 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         onSwipe -= HandleSwipe;
-        
+
     }
     private void Awake()
     {
@@ -62,15 +69,15 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         CC = this.transform.GetComponent<CharacterController>();
-      
+
     }
 
     private void Update()
     {
-
         PCmovement();
         Androidmovement();
         Recharge_Speed();
+        Gravity();
     }
     public void HorizontalMove(int dir)
     {
@@ -80,64 +87,80 @@ public class PlayerController : MonoBehaviour
     {
         float fwd_Dir = 1;
         float right = Input.GetAxis("Horizontal") * HorizontalSpeed;
-        float forward = fwd_Dir * VerticalSpeed ;
-        Vector3 DesiredMoveDir = new Vector3(right, 0, forward);
+        float forward = fwd_Dir * VerticalSpeed;
+        DesiredMoveDir = Vector3.right * right + Vector3.forward * forward;
         CC?.Move(DesiredMoveDir * Time.deltaTime);
     }
     void Androidmovement()
     {
-        switch (movementMode) {
-        case EMovementMode.tap:
+        switch (movementMode)
+        {
+            case EMovementMode.tap:
                 float fwd_Dir = 1;
                 float right = DirX * HorizontalSpeed;
                 float forward = fwd_Dir * VerticalSpeed;
-                Vector3 DesiredMoveDir = new Vector3(right, 0, forward);
+                DesiredMoveDir.x = right;
+                DesiredMoveDir.z = forward;
                 CC?.Move(DesiredMoveDir * Time.deltaTime);
-        break;
+                break;
 
 
-        case EMovementMode.swipe:
+            case EMovementMode.swipe:
 
-            
 
-                if(Input.touchCount >= 1)
+
+                if (Input.touchCount >= 1)
                 {
                     Touch touch = Input.GetTouch(0);
-                    if(touch.phase == TouchPhase.Began)
+                    if (touch.phase == TouchPhase.Began)
                     {
                         startpos = touch.position;
                     }
-                    if(touch.phase == TouchPhase.Ended)
+                    if (touch.phase == TouchPhase.Ended)
                     {
                         endpos = touch.position;
-                       Vector2 delta = (endpos - startpos);
-                 
+                        Vector2 delta = (endpos - startpos);
+
                         onSwipe?.Invoke(delta);
 
                     }
                 }
 
-         break;
+                break;
         }
-        
+
 
     }
-
+    private void Gravity()
+    {
+        isGrounded = Physics.CheckSphere(groundCheckT.position,0.1f,groundLayer);
+        Vector3 pVelocity;
+        if (!isGrounded)
+        {
+            gForce -= Mathf.Sqrt(9.81f * 2 * Time.deltaTime);
+        }
+        else
+        {
+            gForce = -1f;
+        }
+        pVelocity = Vector3.up * gForce;
+        CC?.Move(pVelocity * Time.deltaTime);
+    }
     void HandleSwipe(Vector2 delta)
     {
-        if(Mathf.Abs(delta.x) < Mathf.Abs(delta.y))
+        if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y))
         {
             return;
         }
-        if(delta.magnitude < maxSwipeDistance)
+        if (delta.magnitude < maxSwipeDistance)
         {
             return;
         }
 
-        if(delta.x < -maxSwipeDistance)
+        if (delta.x < -maxSwipeDistance)
         {
             swipe = ESwipe.left;
-      
+
             Debug.Log(swipe);
         }
         else if (delta.x > maxSwipeDistance)
@@ -146,7 +169,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log(swipe);
         }
 
-        switch (swipe) {
+        switch (swipe)
+        {
             case ESwipe.right:
                 SwitchLaneRight();
                 break;
@@ -154,24 +178,24 @@ public class PlayerController : MonoBehaviour
                 SwitchLaneLeft();
                 break;
         }
-        
+
     }
 
     private void SwitchLaneRight()
     {
-        if(currentLane == 1 || currentLane == 2)
+        if (currentLane == 1 || currentLane == 2)
         {
 
-            float TargetLocation =transform.position.x + SwipeMoveDistance * 1;
+            float TargetLocation = transform.position.x + SwipeMoveDistance * 1;
             transform.DOMoveX(TargetLocation, LaneSwitchSpeed);
             currentLane += 1;
         }
     }
     private void SwitchLaneLeft()
     {
-        if (currentLane == 2 || currentLane ==3)
+        if (currentLane == 2 || currentLane == 3)
         {
-            float TargetLocation =transform.position.x + SwipeMoveDistance * -1;
+            float TargetLocation = transform.position.x + SwipeMoveDistance * -1;
             transform.DOMoveX(TargetLocation, LaneSwitchSpeed);
             currentLane -= 1;
         }
@@ -179,16 +203,16 @@ public class PlayerController : MonoBehaviour
 
     private void Recharge_Speed()
     {
-        if(VerticalSpeed <= Obstacle_Manager.Instance.Cached_Speed && canRechargeSpeed )
+        if (VerticalSpeed <= Obstacle_Manager.Instance.Cached_Speed && canRechargeSpeed)
         {
             VerticalSpeed = Mathf.Lerp(VerticalSpeed, Obstacle_Manager.Instance.Cached_Speed, 2 * Time.deltaTime);
         }
-        if(VerticalSpeed >= Obstacle_Manager.Instance.Cached_Speed - 0.2f)
+        if (VerticalSpeed >= Obstacle_Manager.Instance.Cached_Speed - 0.2f)
         {
             Debug.LogWarning("Vertical speed matched");
             canRechargeSpeed = false;
         }
-       
+
     }
     public void Activate_Recharge()
     {
@@ -200,7 +224,7 @@ public class PlayerController : MonoBehaviour
 
         canRechargeSpeed = true;
     }
- 
+
 }
 
 
