@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-        //PCmovement();
+        PCmovement();
         Androidmovement();
         Recharge_Speed();
          float newX = Mathf.MoveTowards(transform.position.x,TargetMoveX,VerticalSpeed * Time.deltaTime);
