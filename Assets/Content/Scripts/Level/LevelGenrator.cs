@@ -63,7 +63,7 @@ public class LevelGenrator : MonoBehaviour
     private void GenerateChunk()
     {
         //int RandomChunk = Random.Range(0, chunks.Count);
-        int [] tempIndex = {0,5};
+        int [] tempIndex = {0,1,3,5};
         int RandomChunk = tempIndex[Random.Range(0,tempIndex.Length)];
         Chunk chunk = chunks[RandomChunk];
         GameObject newChunk;

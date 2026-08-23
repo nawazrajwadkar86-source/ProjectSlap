@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChunkProperty
   name: Safe Chunk_02
   chunkType: 1
-  chunkPrefab: {fileID: 4932996388469043995, guid: 4312426eb4982b4468ac0008db724158, type: 3}
+  chunkPrefab: {fileID: 8713366044715167014, guid: 6776d9ca7749e764b9a13b565c7596bd, type: 3}
   chunkLength: 60
   YTranslation: 0

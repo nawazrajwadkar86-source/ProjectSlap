@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: lambert2
+  m_Name: Metal
   m_Shader: {fileID: -6465566751694194690, guid: d634b0365571e6343996644a24c3c87c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
