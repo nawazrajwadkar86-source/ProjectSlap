@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3aa14696c40821f4681cee06e8070472
+guid: 83b884f3c48c4ef4c81aab53a3d393a7
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -8,127 +8,47 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Board
-    second: {fileID: 2100000, guid: e401db1c8061a97439d5cc2ecacc687c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Book
-    second: {fileID: 2100000, guid: 97c7be7e73d757848a29c5d23ba13916, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Book1
-    second: {fileID: 2100000, guid: de2c8b6ae0d5c34478f9afb71cd83969, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Book2
-    second: {fileID: 2100000, guid: 9019c2d570eb0f446bcf153dd047acc7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Book3
-    second: {fileID: 2100000, guid: 78281e35de74a9b4da049f9c95a65e02, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Book4
-    second: {fileID: 2100000, guid: 3d3a137f2d511274792625e7936d23bf, type: 2}
+    second: {fileID: 2100000, guid: f69b82f887e465946b710ce52b266287, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Bottle
-    second: {fileID: 2100000, guid: 2d0a9dd1440c95d42bd7f53acd3ca924, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Chair
-    second: {fileID: 2100000, guid: 250afed58f894c3479751ffed3a83780, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Magnet
-    second: {fileID: 2100000, guid: 28786cbd4b2fc7e40ade94db64c561ab, type: 2}
+    second: {fileID: 2100000, guid: 3c287bf717234524baf240b795fd0444, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Metal
-    second: {fileID: 2100000, guid: d3b58825a8a32d549b4c061d0f64be7a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Notes
-    second: {fileID: 2100000, guid: 09ed2e76318e8284e8cbc3228bfb9502, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Notes1
-    second: {fileID: 2100000, guid: 6e9ca37ce58be8c4085ade410ee8747c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Notes2
-    second: {fileID: 2100000, guid: b0156a395c66540468fb758236ead101, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Screen
-    second: {fileID: 2100000, guid: fd4531204c0ec5e4bb3c1541ad47b67c, type: 2}
+    second: {fileID: 2100000, guid: 45aa25d0a6f34f14b81d5bbe0f43de47, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Wood
-    second: {fileID: 2100000, guid: 4f032f690aedfb74dbee36bc40dfb2be, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blinn10
-    second: {fileID: 2100000, guid: aecfc5175c998d34a92cb58d82fe5e75, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blinn12
-    second: {fileID: 2100000, guid: 99197037b35ac614eb7ff883c3cb7c26, type: 2}
+    second: {fileID: 2100000, guid: 6d4c029769683da4586f4979eafcdeba, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: blinn13
-    second: {fileID: 2100000, guid: e7d655097750794499462a313799ce2b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blinn14
-    second: {fileID: 2100000, guid: 13f0e08a69886a24f9696bdc37555d1a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blinn15
-    second: {fileID: 2100000, guid: 3faba5f9967a0824daf2fd71c1ae0760, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blinn18
-    second: {fileID: 2100000, guid: fb380c455ea6e5e49a625356205e77ea, type: 2}
+    second: {fileID: 2100000, guid: 81bf761ead249284b865724d0888c92f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: blinn19
-    second: {fileID: 2100000, guid: c7b6f9619e0ede044ac82ca5c297ccaa, type: 2}
+    second: {fileID: 2100000, guid: 39d17416b17438d4494959042d2d62b3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: blinn20
-    second: {fileID: 2100000, guid: 27c05c6a1a795bd4c87bfe34d7a732e6, type: 2}
+    second: {fileID: 2100000, guid: 59088617dccb90b4cb088230b8eb3e28, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: blinn21
-    second: {fileID: 2100000, guid: 6e148e46fad2b1146869e5f152d1c7ef, type: 2}
+    second: {fileID: 2100000, guid: cdf6404fe4837744c84a1f2db33c8854, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: bda98298ee2fdaf46a7711527ea9a721, type: 2}
+      name: lambert2
+    second: {fileID: 2100000, guid: 1ab00ae723e7cf94f93f64d8fc5957be, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
