@@ -8,6 +8,7 @@ public class WorldPathCurve : MonoBehaviour
     private static int seePosID = Shader.PropertyToID("_Position");
     private static int seeSizeID = Shader.PropertyToID("_size");
     private static int seeBoolID = Shader.PropertyToID("_Circle_Seethrough");
+    [SerializeField] private Vector2 curveVec;
     private Camera Camera;
     private Transform player;
     public LayerMask SeeThroughLayer;
@@ -20,7 +21,8 @@ public class WorldPathCurve : MonoBehaviour
     private float maxPathCurve = 0.0015f;
     public float CurveChangeSpeed = 0.0001f;
 
-
+    float _time;
+    private float nextCurvetUpdateTime;
 
     private void Start()
     {
@@ -29,16 +31,15 @@ public class WorldPathCurve : MonoBehaviour
 
         foreach (var m in assetReference.worldCurveMaterial)
         {
-            m.SetFloat("_curve_Amount", 0.0015f);
+            m.SetVector("_curve_Amount", curveVec);
         }
+
+        nextCurvetUpdateTime = _time + 4;
     }
     private void Update()
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            ChangePath();
-        }
-
+        _time += Time.deltaTime;
+        PathCurveGenration();
         SeeTroughtObjects();
     }
     private void ChangePath()
@@ -47,37 +48,43 @@ public class WorldPathCurve : MonoBehaviour
     }
     IEnumerator ChangeInPath()
     {
-        float time = 0;
-        rightSide = !rightSide;
-        int sign = rightSide ? 1 : -1;
-        float cachedCurvedPath = currentCurvedPath;
+        float CoTime = 0;
 
-        while (time < 1)
+        float x = Random.Range(0.0f,1.0f) > 0.5f?-1:1;
+        float y = Random.Range(0.0f,1.0f) > 0.5f?-1:1;
+
+        Vector2 initialPos = curveVec;
+        Vector2 targetPos = new Vector2(x * 0.0015f, y * 0.00075f);
+        while (CoTime < 1)
         {
-            time += Time.deltaTime * CurveChangeSpeed;
-            currentCurvedPath = Mathf.Lerp(cachedCurvedPath, sign * maxPathCurve, time);
+            CoTime += Time.deltaTime * .75f;
+
+            curveVec = Vector2.Lerp(initialPos,targetPos,CoTime);
 
             foreach (var m in assetReference.worldCurveMaterial)
             {
-                m.SetFloat(curverAmountID, currentCurvedPath);
+                m.SetVector(curverAmountID, curveVec);
             }
             yield return null;
         }
-
-        yield return null;
     }
-
+    private void PathCurveGenration()
+    {
+        if (_time > nextCurvetUpdateTime)
+        {
+            ChangePath();
+            nextCurvetUpdateTime = _time + Random.Range(12, 20);
+        }
+    }
     private void SeeTroughtObjects()
     {
-        Vector3 dir =  ((player.position + Vector3.up * 0.5f)  - Camera.transform.position).normalized;
+        Vector3 dir = ((player.position + Vector3.up * 0.5f) - Camera.transform.position).normalized;
         Ray ray = new Ray(Camera.transform.position, dir);
-        
+
 
         if (Physics.Raycast(ray, out RaycastHit hit, 3000, SeeThroughLayer))
         {
-           // Debug.Log("Hit: " + hit.transform.name);
-            
-
+            // Debug.Log("Hit: " + hit.transform.name);
             hitMeshRenderer = hit.transform.GetComponent<MeshRenderer>();
             if (hitMeshRenderer != null)
             {
@@ -101,7 +108,7 @@ public class WorldPathCurve : MonoBehaviour
 
                 foreach (var m in mats)
                 {
-                    seeTrhoughMaterialList.Add(m); 
+                    seeTrhoughMaterialList.Add(m);
                     if (m.GetInt(seeBoolID) == 0)
                     {
                         return;
