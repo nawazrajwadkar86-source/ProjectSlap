@@ -3395,8 +3395,8 @@ MonoBehaviour:
   Max_Score_txt: {fileID: 2816788293034630452}
   Coin_txt: {fileID: 908813640535871631}
   Max_Coin_txt: {fileID: 5977657459927833736}
-  Ad: {fileID: 882439076}
-  ad_Cut_btn: {fileID: 795690352}
+  Ad: {fileID: 0}
+  ad_Cut_btn: {fileID: 0}
 --- !u!4 &1169585432
 Transform:
   m_ObjectHideFlags: 0
@@ -3460,7 +3460,6 @@ MonoBehaviour:
   - ChunkType: 0
     chunkPropertiesList:
     - {fileID: 11400000, guid: 6dcf623f626026f4496aba285ce82dc6, type: 2}
-    - {fileID: 11400000, guid: 49712e64a3c2b504394409257b0bca80, type: 2}
     size: 15
   - ChunkType: 1
     chunkPropertiesList: []
@@ -3697,7 +3696,7 @@ MonoBehaviour:
   canRechargeSpeed: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 0
   groundCheckT: {fileID: 1059330038}
   maxSwipeDistance: 10
   SwipeMoveDistance: 2
@@ -4672,7 +4671,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -173.37, y: -125.869995}
+  m_AnchoredPosition: {x: -173.37, y: -125.86987}
   m_SizeDelta: {x: 338.75, y: 111.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1765912019

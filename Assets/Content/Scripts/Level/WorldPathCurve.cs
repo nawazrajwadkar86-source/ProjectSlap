@@ -139,4 +139,12 @@ public class WorldPathCurve : MonoBehaviour
             seeTrhoughMaterialList.Clear();
         }
     }
+
+    private void OnDestroy()
+    {
+        foreach (var m in assetReference.worldCurveMaterial)
+        {
+            m.SetVector("_curve_Amount", new Vector2(0,0));
+        }
+    }
 }
