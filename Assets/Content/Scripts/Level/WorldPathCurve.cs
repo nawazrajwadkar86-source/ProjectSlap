@@ -14,13 +14,13 @@ public class WorldPathCurve : MonoBehaviour
     public LayerMask SeeThroughLayer;
 
     public AssetReference assetReference;
-    public List<Material> seeTrhoughMaterialList = new List<Material>();
+    public List<MeshRenderer> seeTrhoughMaterialList = new List<MeshRenderer>();
+    public MaterialPropertyBlock addMaterialPropertyBlock;
+    public MaterialPropertyBlock resetMaterialPropertyBlock;
     private MeshRenderer hitMeshRenderer;
-    private bool rightSide = true;
-    private float currentCurvedPath = 0.0015f;
-    private float maxPathCurve = 0.0015f;
     public float CurveChangeSpeed = 0.0001f;
-
+    private float CurveXValue = -0.0015f;
+    private float CurveYValue = 0.00125f;
     float _time;
     private float nextCurvetUpdateTime;
 
@@ -29,10 +29,15 @@ public class WorldPathCurve : MonoBehaviour
         Camera = Camera.main;
         player = FindAnyObjectByType<PlayerController>().transform;
 
+        addMaterialPropertyBlock = new MaterialPropertyBlock();
+        resetMaterialPropertyBlock = new MaterialPropertyBlock();
+
+        curveVec.x = CurveXValue;
         foreach (var m in assetReference.worldCurveMaterial)
         {
             m.SetVector("_curve_Amount", curveVec);
         }
+
 
         nextCurvetUpdateTime = _time + 4;
     }
@@ -54,7 +59,7 @@ public class WorldPathCurve : MonoBehaviour
         float y = Random.Range(0.0f,1.0f) > 0.5f?-1:1;
 
         Vector2 initialPos = curveVec;
-        Vector2 targetPos = new Vector2(x * 0.0015f, y * 0.00075f);
+        Vector2 targetPos = new Vector2(CurveXValue, y * CurveYValue);
         while (CoTime < 1)
         {
             CoTime += Time.deltaTime * .75f;
@@ -88,38 +93,43 @@ public class WorldPathCurve : MonoBehaviour
             hitMeshRenderer = hit.transform.GetComponent<MeshRenderer>();
             if (hitMeshRenderer != null)
             {
-                Material[] mats = hitMeshRenderer.materials;
+                //Material[] mats = hitMeshRenderer.sharedMaterials;materialPropertyBlock;
+                hitMeshRenderer.GetPropertyBlock(addMaterialPropertyBlock);
+                
 
-                if (mats != seeTrhoughMaterialList.ToArray() && seeTrhoughMaterialList.Count > 0)
+                if (!seeTrhoughMaterialList.Contains(hitMeshRenderer) && seeTrhoughMaterialList.Count > 0)
                 {
-                    foreach (var m in seeTrhoughMaterialList)
+                    
+                    foreach (var rend in seeTrhoughMaterialList)
                     {
-                        if (m.GetInt(seeBoolID) == 0)
+                        rend.GetPropertyBlock(resetMaterialPropertyBlock); 
+                        
+                        if (rend.sharedMaterial.GetInt(seeBoolID) == 0)
                         {
                             return;
                         }
                         else
                         {
-                            m.SetFloat(seeSizeID, 0);
+                            resetMaterialPropertyBlock.SetFloat(seeSizeID, 0);
+                            rend.SetPropertyBlock(resetMaterialPropertyBlock);
                         }
                     }
                     seeTrhoughMaterialList.Clear();
                 }
 
-                foreach (var m in mats)
-                {
-                    seeTrhoughMaterialList.Add(m);
-                    if (m.GetInt(seeBoolID) == 0)
+                seeTrhoughMaterialList.Add(hitMeshRenderer);
+                    if (hitMeshRenderer.sharedMaterial.GetInt(seeBoolID) == 0)
                     {
                         return;
                     }
                     else
                     {
                         Vector3 view = Camera.WorldToViewportPoint(hit.point);
-                        m.SetFloat(seeSizeID, .75f);
-                        m.SetVector(seePosID, view);
+                        addMaterialPropertyBlock.SetFloat(seeSizeID, .75f);
+                        addMaterialPropertyBlock.SetVector(seePosID, view);
+
+                        hitMeshRenderer.SetPropertyBlock(addMaterialPropertyBlock);
                     }
-                }
             }
 
         }
@@ -144,7 +154,7 @@ public class WorldPathCurve : MonoBehaviour
     {
         foreach (var m in assetReference.worldCurveMaterial)
         {
-            m.SetVector("_curve_Amount", new Vector2(0,0));
+            m.SetVector("_curve_Amount", new Vector2(CurveXValue,0));
         }
     }
 }

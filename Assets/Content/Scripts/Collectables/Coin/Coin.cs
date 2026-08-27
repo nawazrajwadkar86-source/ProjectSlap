@@ -6,14 +6,10 @@ public class Coin : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    private Animator coin_animator;
+    public Animator coin_animator;
     private void OnEnable()
     {
-      
-    }
-    void Start()
-    {
-        coin_animator = GetComponent<Animator>();
+        coin_animator.Play("Coin_Rotation_anim");
     }
 
     void PlayCoinCollectedAnimation()
@@ -32,6 +28,7 @@ public class Coin : MonoBehaviour
     }
     void DestroySelfReleaseMemeory()
     {
-        Destroy(gameObject);
+
+        gameObject.SetActive(false);
     }
 }

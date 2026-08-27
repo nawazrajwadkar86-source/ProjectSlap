@@ -32,7 +32,7 @@ public class ActorGenerator : MonoBehaviour
     {
         ClearSpawnedActors();
     }
-        private void Initialize()
+    private void Initialize()
     {
         objectPooling = ObjectPooling.instance;
 

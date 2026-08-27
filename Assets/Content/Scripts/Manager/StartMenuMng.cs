@@ -6,11 +6,11 @@ public class StartMenuMng : MonoBehaviour
 {
     public TextMeshProUGUI coin_T; 
     public TextMeshProUGUI gems_T; 
-
+    
     private void Start()
     {
         UpdateUI();
-        
+        Application.targetFrameRate = 60;
     }
     private void UpdateUI()
     {
@@ -18,6 +18,6 @@ public class StartMenuMng : MonoBehaviour
     }
     public void LoadGameScene()
     {
-        SceneManager.LoadScene("Protoype");
+        SceneManager.LoadScene("Prototype");
     }
 }

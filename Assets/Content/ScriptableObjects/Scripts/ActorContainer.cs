@@ -102,7 +102,7 @@ public enum Category
 {
     Empty,
     Door,
-    coins,
+    coin_Column,
     coins_DiagonalRight,
     coins_DiagonalLeft,
     Enemy,
@@ -117,5 +117,6 @@ public enum Category
     WetCautions_Ob,
     Booster,
     Traps,
-    NPC
+    NPC,
+    Coin_Single,
 }

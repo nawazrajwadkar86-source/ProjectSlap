@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0fba9fe79600dd4cb27360f64be6d4f, type: 3}
-  m_Name: Common Actors
+  m_Name: TransitionChunk_Actors
   m_EditorClassIdentifier: Assembly-CSharp::ActorContainer
   container:
-  - Category: 0
-    PrefabsName: []
+  - name: Coin
+    Category: 18
+    PrefabsName:
+    - Coin
