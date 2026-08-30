@@ -4540,7 +4540,7 @@ MonoBehaviour:
     size: 80
   - name: Coin
     prefab: {fileID: 2580343732356931145, guid: 75463c97a14ef2449bd569f0fbeca8d7, type: 3}
-    size: 250
+    size: 300
 --- !u!4 &1638797686
 Transform:
   m_ObjectHideFlags: 0

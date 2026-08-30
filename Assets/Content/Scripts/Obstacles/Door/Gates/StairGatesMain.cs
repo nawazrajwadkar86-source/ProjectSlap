@@ -19,13 +19,13 @@ public class StairGatesMain : MonoBehaviour
         switch (randomDoorIndex)
         {
             case 0:
-            anim.CrossFade("left Opened",1);
+            anim.CrossFade("left Opened",.5f);
             break;
             case 1:
-            anim.CrossFade("Middle Opened",1);
+            anim.CrossFade("Middle Opened",.5f);
             break;
             case 2:
-            anim.CrossFade("Right Opened",1);
+            anim.CrossFade("Right Opened",.5f);
             break;
         }
     }
@@ -39,7 +39,6 @@ public class StairGatesMain : MonoBehaviour
     {
          if (other.CompareTag("Player") && Dynamic)
         {
-            Debug.Log("OpenDoor");
             OpenDoor();
         }
     }
