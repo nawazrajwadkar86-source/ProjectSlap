@@ -19,9 +19,6 @@ public class ActorGeneratorStairs : MonoBehaviour
             objectPooling = ObjectPooling.instance;
             
         }
-        
-        
-        
     }
     private void Start()
     {

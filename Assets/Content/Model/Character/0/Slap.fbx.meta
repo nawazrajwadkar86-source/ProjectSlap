@@ -22,7 +22,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -83,7 +83,117 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Run(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cog
+      parentName: Run(Clone)
+      position: {x: 0.00017480046, y: 0.33462453, z: 0.000008123231}
+      rotation: {x: -0.7053361, y: 0.70887303, z: -0, w: 0}
+      scale: {x: 1.0000001, y: 1, z: 1.0000004}
+    - name: Chest_2
+      parentName: Cog
+      position: {x: -0.22737983, y: 0.0012839107, z: -3.2196467e-17}
+      rotation: {x: 0.0061910897, y: -0.25520927, z: 0.019054621, w: 0.96667826}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1.0000007}
+    - name: Chest1
+      parentName: Chest_2
+      position: {x: -0.21578938, y: 0.0014339011, z: 0.10811367}
+      rotation: {x: 0.620696, y: -0.7185636, z: -0.31333387, w: 0.014992744}
+      scale: {x: 0.9999997, y: 1, z: 0.9999997}
+    - name: Head
+      parentName: Chest1
+      position: {x: -0.021170955, y: 0.124411285, z: -0.038633216}
+      rotation: {x: -0.0107928375, y: 0.22344643, z: 0.017599287, w: 0.9744976}
+      scale: {x: 1.0000002, y: 1.0000001, z: 0.9999996}
+    - name: Shoulder_L
+      parentName: Chest1
+      position: {x: -0.23753345, y: -0.010772123, z: 0.031633284}
+      rotation: {x: -0.0053412314, y: 0.2236454, z: 0.0521371, w: 0.9732605}
+      scale: {x: 1.0000002, y: 1.0000002, z: 0.9999996}
+    - name: Elbow_L
+      parentName: Shoulder_L
+      position: {x: -0.2150439, y: 0.0021747411, z: -3.5527136e-17}
+      rotation: {x: 0.00040963193, y: 0.02896044, z: -0.038653307, w: 0.9988328}
+      scale: {x: 1.0000002, y: 1.0000001, z: 0.99999994}
+    - name: Wrist_L
+      parentName: Elbow_L
+      position: {x: -0.31679595, y: -0.0036022323, z: 0.0059121028}
+      rotation: {x: -0.0000000050058584, y: -0.00000002235174, z: -0.05361368, w: 0.99856174}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Shoulder_R
+      parentName: Chest1
+      position: {x: 0.1611653, y: -0.0015548451, z: -0.16139597}
+      rotation: {x: 0.9740609, y: -0.033986922, z: -0.22230926, w: 0.025079507}
+      scale: {x: 1.0000006, y: 1.0000007, z: 1.0000005}
+    - name: Elbow_R
+      parentName: Shoulder_R
+      position: {x: 0.21504392, y: -0.0021746259, z: -5.3290704e-17}
+      rotation: {x: 0.00037121942, y: 0.028918697, z: -0.039104454, w: 0.99881655}
+      scale: {x: 1.0000004, y: 0.99999994, z: 0.9999996}
+    - name: Wrist_R
+      parentName: Elbow_R
+      position: {x: 0.3167957, y: 0.0036019664, z: -0.0059121023}
+      rotation: {x: 0.00000011548397, y: 0.000000007450579, z: -0.053613912, w: 0.9985618}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: Hip_L
+      parentName: Cog
+      position: {x: 0.044255342, y: 0.1458802, z: 0.02871566}
+      rotation: {x: -0.009861719, y: 0.0012330641, z: 0.99979585, w: 0.017593771}
+      scale: {x: 1.0000006, y: 1.0000004, z: 1.0000007}
+    - name: Knee_L
+      parentName: Hip_L
+      position: {x: -0.16357118, y: 3.5527136e-17, z: 3.1086245e-17}
+      rotation: {x: -0.9987367, y: -0.026415175, z: -0.006686774, w: -0.042222377}
+      scale: {x: 1, y: 0.9999998, z: 0.9999998}
+    - name: Feet_L
+      parentName: Knee_L
+      position: {x: -0.113838606, y: -0.004377804, z: -0.021271791}
+      rotation: {x: 0.5140873, y: 0.5259764, z: -0.45846173, w: 0.49887463}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1}
+    - name: joint11
+      parentName: Feet_L
+      position: {x: -0.16322103, y: 0.0019768986, z: 1.0658141e-16}
+      rotation: {x: -0.49110276, y: 0.5087416, z: -0.4911028, w: 0.5087417}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1.0000001}
+    - name: Hip_R
+      parentName: Cog
+      position: {x: 0.033766344, y: -0.15130687, z: 0.0287157}
+      rotation: {x: 0.99984443, y: -0.017638952, z: 0.000000023382105, w: -0.0000000054091727}
+      scale: {x: 1.0000006, y: 1.0000006, z: 1.0000002}
+    - name: Knee_R
+      parentName: Hip_R
+      position: {x: 0.17362998, y: -0.00030465497, z: 6.42014e-12}
+      rotation: {x: 0.003203978, y: 0.10578635, z: -0.000000057742, w: 0.9943838}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000001}
+    - name: Feet_R
+      parentName: Knee_R
+      position: {x: 0.115891896, y: 3.5527136e-17, z: -6.217249e-17}
+      rotation: {x: 0.45955807, y: 0.5414061, z: 0.537326, w: -0.4549359}
+      scale: {x: 1.0000005, y: 1.0000008, z: 1.0000005}
+    - name: joint23
+      parentName: Feet_R
+      position: {x: 0.16229483, y: -0.0014717244, z: -0.00007206234}
+      rotation: {x: -0.49110284, y: 0.50874156, z: -0.491103, w: 0.5087416}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: Geo
+      parentName: Run(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Body
+      parentName: Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hair
+      parentName: Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -94,13 +204,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 010b9a6711056e544a26ba0ab18e65c4, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

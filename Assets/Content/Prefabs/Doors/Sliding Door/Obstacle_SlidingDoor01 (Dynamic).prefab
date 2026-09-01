@@ -1332,6 +1332,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  doorsMain:
+  - {fileID: 4440551406312017216}
+  - {fileID: 3411034693596434682}
+  - {fileID: 2737852935630354954}
 --- !u!65 &931874838012051703
 BoxCollider:
   m_ObjectHideFlags: 0

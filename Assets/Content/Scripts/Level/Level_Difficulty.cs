@@ -9,12 +9,15 @@ public class Level_Difficulty : MonoBehaviour
     private Vector3 Init_location;
     public GameObject Player;
     public static Level_Difficulty Instance;
+    private float gameplayDuration;
 
     void Start()
     {
      PlayerController pc = FindAnyObjectByType<PlayerController>();
         Init_location = Player.transform.position;
         Max_Distance_Travelled = PlayerPrefs.GetFloat("max_distance_travelled");
+
+        gameplayDuration = 0;
     }
     private void Awake()
     {
@@ -28,6 +31,8 @@ public class Level_Difficulty : MonoBehaviour
 
     public void DistanceBasedSpeed()
     {
+        if(gameplayDuration < 180)gameplayDuration += Time.deltaTime;
+
        Distance_Travelled = (Player.transform.position - Init_location).magnitude;
         if(Distance_Travelled > Max_Distance_Travelled)
         {
@@ -39,9 +44,14 @@ public class Level_Difficulty : MonoBehaviour
         }
         if (!PlayerController.playerController_Instance.canRechargeSpeed)
         {
+        
+        float TargetSpeed = Mathf.Lerp(5f, 10f, Mathf.InverseLerp(0, 180, gameplayDuration));
 
-        float TargetSpeed = Mathf.Lerp(5f, 8f, Mathf.InverseLerp(0, 3000, Distance_Travelled));
-        PlayerController.playerController_Instance.VerticalSpeed = TargetSpeed;
+            if (Mathf.RoundToInt(gameplayDuration % 5) == 0)
+            {
+                PlayerController.playerController_Instance.VerticalSpeed = TargetSpeed;
+            }
         }
+        
     }
 }

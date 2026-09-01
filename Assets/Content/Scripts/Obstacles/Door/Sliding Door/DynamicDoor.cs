@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +8,7 @@ public class DynamicDoor : MonoBehaviour
     int openedDoorIndex;
     private Animator anim;
     public UnityEvent ResetDamage;
+    public List<GameObject> doorsMain = new List<GameObject>();
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -14,6 +16,10 @@ public class DynamicDoor : MonoBehaviour
     private void OnEnable()
     {
         ResetDamage?.Invoke();
+        foreach(var g in doorsMain)
+        {
+            g.SetActive(true);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
