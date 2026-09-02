@@ -16,9 +16,9 @@ public class ActorGeneratorStairs : MonoBehaviour
     {
         if(objectPooling != null)
         {
-            objectPooling = ObjectPooling.instance;
-            
+            spawnActors();
         }
+        
     }
     private void Start()
     {

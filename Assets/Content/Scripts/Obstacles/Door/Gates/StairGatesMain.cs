@@ -32,7 +32,7 @@ public class StairGatesMain : MonoBehaviour
 
     private void CloseDoor()
     {
-        anim.CrossFade("Default",1);
+        anim.Play("Default");
     }
 
     private void OnTriggerEnter(Collider other)
