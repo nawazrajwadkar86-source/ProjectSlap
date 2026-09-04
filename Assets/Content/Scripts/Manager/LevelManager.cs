@@ -21,8 +21,6 @@ public class LevelManager : MonoBehaviour
     {
         Time.timeScale = 1;
         Instance = this;
-     
-
     }
 
     // Update is called once per frame

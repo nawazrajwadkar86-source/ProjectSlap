@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Obstacle_Manager : MonoBehaviour
@@ -26,16 +27,24 @@ public class Obstacle_Manager : MonoBehaviour
     {
         if (other.transform.CompareTag("obstacle"))
         {
-   
-            Cached_Speed = PlayerController.playerController_Instance.VerticalSpeed;
-            PlayerController.playerController_Instance.VerticalSpeed /= 2;
-            ph.reduction_amount = 0.5f;
-
-            Animator_.SetTrigger("damage");
-
             OnObstacleHit?.Invoke();
 
             other.GetComponent<IObstacle>().OnHit(other.ClosestPoint(transform.position)); 
+            StartCoroutine(DamageEffect());
         }
+    }
+    private IEnumerator DamageEffect()
+    {
+        
+        Animator_.applyRootMotion = true;
+        Animator_.SetTrigger("damage");
+
+        Cached_Speed = PlayerController.playerController_Instance.VerticalSpeed;
+        PlayerController.playerController_Instance.VerticalSpeed = 0;
+
+        yield return new WaitForSeconds(Animator_.GetCurrentAnimatorStateInfo(0).length);
+
+        PlayerController.playerController_Instance.VerticalSpeed = Cached_Speed;
+        ph.reduction_amount = 0.5f;
     }
 }

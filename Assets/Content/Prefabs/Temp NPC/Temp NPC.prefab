@@ -313,7 +313,7 @@ MonoBehaviour:
   bisSlapped: 0
   HeatIncreaseVal: 0.05
   CanChase: 0
-  Speed: 0.05
+  Speed: 30
   Chase_Wait_Time: 0
   chaseState: 0
   SO: {fileID: 11400000, guid: 22aabd86a7ec02448a36d8256852f47f, type: 2}

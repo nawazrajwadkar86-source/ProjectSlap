@@ -94,7 +94,7 @@ public class Employee : Target
     }
     private void Chase()
     {
-            SteeringSeparation();
+        SteeringSeparation();
         if (player) {  
             targetLocation.y = 0.75f;
             Invoke(nameof( WaitChase), Chase_Wait_Time);
@@ -135,5 +135,11 @@ public class Employee : Target
     public  override void SetSpeed(float new_speed)
     {
         Speed = new_speed;
+    }
+    
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(targetLocation, 0.2f);
     }
 }

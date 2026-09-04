@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     //-----------------------------------Swiping-----------------------------------------------
     [Space(20)]
-    [Header("Swiping")]
+    [Header("Swiping")] 
 
     public float maxSwipeDistance = 500f;
     public float SwipeMoveDistance = 0.5f;
