@@ -12,15 +12,7 @@ public class ChunkPooling : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
+        instance = this;
 
         transform.position = Vector3.zero;
         poolDictionary = new Dictionary<string, List<GameObject>>();

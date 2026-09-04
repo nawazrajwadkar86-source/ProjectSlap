@@ -53,7 +53,7 @@ public class ActorGeneratorStairs : MonoBehaviour
     {
         foreach (var a in spawnedActors)
         {
-            a.SetActive(false);
+            if(a != null)a.SetActive(false);
         }
         spawnedActors.Clear();
     }

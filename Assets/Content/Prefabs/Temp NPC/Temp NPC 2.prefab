@@ -311,7 +311,7 @@ MonoBehaviour:
   MultipleSlapValue: 0.2
   animator: {fileID: 6702252974098135021}
   bisSlapped: 0
-  heat_val: 0.01
+  heat_val: 0.1
 --- !u!1 &8256331562953699679
 GameObject:
   m_ObjectHideFlags: 0

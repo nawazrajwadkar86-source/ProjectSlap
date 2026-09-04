@@ -1,18 +1,20 @@
 using DG.Tweening;
-using System.Runtime.CompilerServices;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Employee : Target
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public float HeatIncreaseVal = 0.05f;
+    public Rigidbody rb;
+    public float HeatIncreaseVal = 0.2f;
     public bool CanChase;
     public float Speed;
+    private float baseSpeed;
     private GameObject player;
     private Vector3 targetLocation;
     private Tween chaseT;
     public float Chase_Wait_Time;
+    private float LifeTime = 12f;
     public enum EChaseState { 
     
         idle,
@@ -26,11 +28,19 @@ public class Employee : Target
     {
         this.HeatIncreaseValue = HeatIncreaseVal;
         player = GameObject.FindGameObjectWithTag("Player");
-        Speed = 1- SO.Speed;
+        //Speed = 1- SO.Speed;
+        baseSpeed = Speed;
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        transform.localPosition = Vector3.zero;
+        chaseState = EChaseState.idle;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(chaseState == EChaseState.chasing)
         {
@@ -38,7 +48,7 @@ public class Employee : Target
         }
         if(chaseState == EChaseState.caught)
         {
-            transform.position = transform.position;
+            rb.position = transform.position;
         }
     }
     protected override void ReceiveDamage(ETargetType type)
@@ -57,12 +67,13 @@ public class Employee : Target
     }
     protected override void Reaction(ETargetType type)
     {
+        Debug.Log("Reaction Called");   
+
         if(chaseState != EChaseState.caught)
         {
         this.chaseState = EChaseState.chasing;
-
+        StartCoroutine(NpcEndLife());
         }
-   
     }
     protected override void SteeringSeparation()
     {
@@ -97,14 +108,27 @@ public class Employee : Target
         SteeringSeparation();
         if (player) {  
             targetLocation.y = 0.75f;
-            Invoke(nameof( WaitChase), Chase_Wait_Time);
 
+            if (Vector3.Distance(transform.position, player.transform.position) < 3f)
+            {
+                Speed = baseSpeed * 0.55f;
+            }
+            else
+            {
+                Speed = baseSpeed;
+            }
+            Vector3 targetPos = player.transform.position + player.transform.forward * -2.25f;
+            rb.position = Vector3.MoveTowards(transform.position, player.transform.position, Speed * Time.fixedDeltaTime);
+
+            Invoke(nameof( WaitChase), Chase_Wait_Time);
         }  
     }
     private void WaitChase()
     {
         chaseT?.Kill();
-        chaseT = transform.DOMove(targetLocation, Speed).SetEase(Ease.Linear).OnComplete(Chase);
+        // chaseT = transform.DOMove(targetLocation, Speed).SetEase(Ease.Linear).OnComplete(Chase);
+        //transform.position = ;
+        
     }
 
     protected override void CaughtPlayer()
@@ -121,6 +145,11 @@ public class Employee : Target
         {
             Debug.LogError("no PH Found !");
         }
+    }
+    IEnumerator NpcEndLife()
+    {
+        yield return new WaitForSeconds(LifeTime);
+        transform.parent.transform.parent.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)

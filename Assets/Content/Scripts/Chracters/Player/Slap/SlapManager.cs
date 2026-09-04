@@ -8,16 +8,17 @@ public class SlapManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     Animator animator;
+    private LevelGenrator levelGenrator;
     private GameObject Current_Enemy;
     public GameObject PlayerMesh;
     [Range(0, 10)]
     public float SlapRange = 1;
     [Range(0, 10)]
     public float AutoSlapRange = 1;
-    private List<GameObject> totatWorldTargets;
+    private List<GameObject> totatWorldTargets = new List<GameObject>();
 
     public static SlapManager slapManager_instance;
-    [HideInInspector] public bool bMultiSlap = false; 
+    [HideInInspector] public bool bMultiSlap = false;
 
 
     public enum ESlapMode
@@ -28,24 +29,32 @@ public class SlapManager : MonoBehaviour
     public ESlapMode SlapMode = ESlapMode.auto;
     //Mobile Inputs
     Touch touch;
-    
-    public enum ESlapType { 
-    
+
+    public enum ESlapType
+    {
+
         none,
         front_slap,
         right_slap,
         left_slap,
-    
+
     }
     public ESlapType ESlap_type = ESlapType.right_slap;
     void Start()
     {
-        totatWorldTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("npc"));
+        //totatWorldTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("npc"));
         animator = transform.GetChild(0).GetComponent<Animator>();
-        if(slapManager_instance == null)
+        if (slapManager_instance == null)
         {
             slapManager_instance = this;
         }
+        
+        if(levelGenrator == null)
+        {
+            levelGenrator = LevelGenrator.instance;
+            levelGenrator.OnchunkUpdate += GetNearbyNpc;
+        }
+        GetNearbyNpc();
     }
 
     // Update is called once per frame
@@ -66,7 +75,7 @@ public class SlapManager : MonoBehaviour
                     Touch touch = Input.GetTouch(0);
                     if (touch.phase == TouchPhase.Began)
                     {
-                        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)|| EventSystem.current.IsPointerOverGameObject())
+                        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId) || EventSystem.current.IsPointerOverGameObject())
                         {
                             Debug.Log("Touch on UI");
                             return;
@@ -79,7 +88,7 @@ public class SlapManager : MonoBehaviour
                 break;
         }
 
-       
+
 #endif
 
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
@@ -105,7 +114,7 @@ public class SlapManager : MonoBehaviour
                 break;
         }
 
-      
+
 
 #endif
     }
@@ -115,8 +124,8 @@ public class SlapManager : MonoBehaviour
         {
 
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(getCurrentTarget().transform.position , 1f);
-   
+            Gizmos.DrawWireSphere(getCurrentTarget().transform.position, 1f);
+
         }
     }
     public void Switch_mode(int n)
@@ -135,51 +144,50 @@ public class SlapManager : MonoBehaviour
     {
         animator.SetTrigger(e_slapType.ToString());
         ChooseSlapType(ref e_slapType);
-            
+
     }
 
     void AutoSlap(ESlapType e_slapType)
     {
-        if(getCurrentTarget() != null)
+        if (getCurrentTarget() != null)
         {
 
-        float Dist = Vector3.Distance(getCurrentTarget().transform.position, transform.position);
-        Target target = getCurrentTarget().GetComponent<Target>();
-       
-        if(Dist < AutoSlapRange)
-        {
-                if(target!= null)
+            float Dist = Vector3.Distance(getCurrentTarget().transform.position, transform.position);
+            Target target = getCurrentTarget().GetComponent<Target>();
+
+            if (Dist < AutoSlapRange)
+            {
+                if (target != null)
                 {
 
-            if (target.bisSlapped)
-            {
-                return;
-            }
+                    if (target.bisSlapped)
+                    {
+                        return;
+                    }
                     if (!target.bisSlapped)
                     {
-            ChooseSlapType(ref e_slapType);
-            animator.SetTrigger(e_slapType.ToString());
+                        ChooseSlapType(ref e_slapType);
+                        animator.SetTrigger(e_slapType.ToString());
                         SlapCounter.Instance.EventOnSlap();
-                    StartCoroutine(Timer(0.3f, () => IsSlapped(target)));
+                        StartCoroutine(Timer(0.3f, () => IsSlapped(target)));
                         target.bisSlapped = true;
                     }
-     
+
                     //  target.bisSlapped = true;
                 }
-        
-        }
-        
+
+            }
+
         }
     }
-    IEnumerator Timer(float Delay,Action action)
+    IEnumerator Timer(float Delay, Action action)
     {
         yield return new WaitForSeconds(Delay);
         action?.Invoke();
     }
     private void IsSlapped(Target target)
     {
-                        target?.CallOnHitTargetEvent(target.type);
-
+        target?.CallOnHitTargetEvent(target.type);
     }
 
     void ChooseSlapType(ref ESlapType slapType)
@@ -189,17 +197,17 @@ public class SlapManager : MonoBehaviour
             return;
         }
         Vector3 RelativeLocation = transform.InverseTransformPoint(getCurrentTarget().transform.position);
-        if(RelativeLocation.x > 0)
+        if (RelativeLocation.x > 0)
         {
             Flip_animation_temp(1);
             slapType = ESlapType.right_slap;
         }
-        else if(RelativeLocation.x < 0)
+        else if (RelativeLocation.x < 0)
         {
             Flip_animation_temp(-1);
             slapType = ESlapType.left_slap;
         }
-        else if(RelativeLocation.z > 0)
+        else if (RelativeLocation.z > 0)
         {
             slapType = ESlapType.front_slap;
         }
@@ -212,14 +220,14 @@ public class SlapManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       /* if(other.transform.CompareTag("npc")){
-            Current_Enemy = other.gameObject;
-        }*/
+        /* if(other.transform.CompareTag("npc")){
+             Current_Enemy = other.gameObject;
+         }*/
     }
     GameObject getCurrentTarget()
     {
-  
-       GameObject bestTarget = null;
+
+        GameObject bestTarget = null;
         float Bestcost = Mathf.Infinity;
         float MaxDistance = SlapRange;
         if (totatWorldTargets != null)
@@ -240,11 +248,29 @@ public class SlapManager : MonoBehaviour
         }
         return bestTarget;
     }
+    private void GetNearbyNpc()
+    {
+        Collider[] col = Physics.OverlapSphere(transform.position,75);
+        foreach (var t in totatWorldTargets)
+        {
+            if (t == null)
+            {
+                totatWorldTargets.Remove(t);
+            }
+        }
+        foreach (var c in col)
+        {
+            if (c.transform.CompareTag("npc"))
+            {
+                totatWorldTargets.Add(c.gameObject);
+            }
+        }
+    }
     void Flip_animation_temp(float flipdir)
     {
-        
-        PlayerMesh.transform.localScale = new Vector3(flipdir,1,1);
+
+        PlayerMesh.transform.localScale = new Vector3(flipdir, 1, 1);
 
     }
-  
+
 }

@@ -1,26 +1,30 @@
-using System.CodeDom.Compiler;
+using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
 public class LevelGenrator : MonoBehaviour
 {
+    public static LevelGenrator instance;
     public Transform Player;
     public List<Chunk> chunks;
     private Queue<GameObject> chunksObjQueue = new Queue<GameObject>();
     private Queue<ChunkProperty> chunkQueue = new Queue<ChunkProperty>();
     public float previousChunkLength;
     ChunkPooling ChunkPooling;
-
     //Important
     private float currentChunkbasePos; // Y
     private float nextChunkPosZ;
-    
     private float nextChunkGenCallPos;
+    public Action OnchunkUpdate;
 
     private void Start()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        
         ChunkPooling = ChunkPooling.instance;
         GenrateStartingChunk();
 
@@ -61,13 +65,13 @@ public class LevelGenrator : MonoBehaviour
             GenerateChunk();
         }
         
-        nextChunkGenCallPos = 30 + chunkQueue.Peek().chunkLength;
+        nextChunkGenCallPos = 45 + chunkQueue.Peek().chunkLength;
     }
     private void GenerateChunk()
     {
         //int RandomChunk = Random.Range(0, chunks.Count);
         int [] tempIndex = {0,1,3,5};//
-        int RandomChunk = tempIndex[Random.Range(0,tempIndex.Length)];
+        int RandomChunk = tempIndex[UnityEngine.Random.Range(0,tempIndex.Length)];
         Chunk chunk = chunks[RandomChunk];
         GameObject newChunk;
         ChunkProperty newChunkProperty = null;
@@ -106,6 +110,7 @@ public class LevelGenrator : MonoBehaviour
 
         chunksObjQueue.Enqueue(newChunk);
     
+        OnchunkUpdate?.Invoke();
     }
 
         //Debugging

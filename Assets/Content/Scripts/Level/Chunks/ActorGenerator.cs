@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class ActorGenerator : MonoBehaviour
@@ -62,11 +59,15 @@ public class ActorGenerator : MonoBehaviour
             }
         }
     }
+
     private void ClearSpawnedActors()
     {
         foreach (var a in spawnedActors)
         {
-            a.SetActive(false);
+            if (a != null && !a.CompareTag("npc"))
+            {
+                a.SetActive(false);
+            }
         }
         spawnedActors.Clear();
     }

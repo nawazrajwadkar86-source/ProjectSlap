@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ActorPlacement
   PlacementSlots:
   - placmenColumns: 000000000000000000000000
-  - placmenColumns: 000000000900000000000000
-  - placmenColumns: 020000000000000002000000
-  - placmenColumns: 030000000e00000004000000
-  - placmenColumns: 0d0000000000000002000000
+  - placmenColumns: 020000000000000000000000
+  - placmenColumns: 00000000070000000c000000
+  - placmenColumns: 060000000600000006000000
+  - placmenColumns: 0d0000000000000006000000
   - placmenColumns: 000000000100000000000000

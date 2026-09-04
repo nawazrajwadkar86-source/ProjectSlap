@@ -13,8 +13,9 @@ abstract public class Target : MonoBehaviour
         
     }
     public ETargetType type = ETargetType.employee;
+    protected LevelGenrator levelGenrator;
     [Range(0,20)]
-    public float HeatIncreaseValue = 0.2f;
+    public float HeatIncreaseValue = 0.5f;
     [Range(0,1)]
     public float MultipleSlapValue = 0.2f;
     public Animator animator;
@@ -22,8 +23,9 @@ abstract public class Target : MonoBehaviour
    
     public event Action<ETargetType> onTargetHit;
     public event Action onCaughtPlayer;
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
+
         onTargetHit += ReceiveDamage;
         onTargetHit += UpdateScore;
         onTargetHit += UpdateHeatMeter;
@@ -80,7 +82,7 @@ abstract public class Target : MonoBehaviour
     }
     protected virtual void Reaction(ETargetType type)
     {
-       
+       Debug.Log("Reaction Called on Target");  
     }
     protected virtual void SteeringSeparation()
     {

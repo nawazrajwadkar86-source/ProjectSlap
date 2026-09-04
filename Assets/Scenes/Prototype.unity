@@ -3088,7 +3088,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.25
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &964983064
 GameObject:
@@ -4000,7 +4000,7 @@ GameObject:
   - component: {fileID: 1342341025}
   - component: {fileID: 1342341026}
   - component: {fileID: 1342341027}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4761,7 +4761,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.25
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1595505579
 GameObject:
@@ -5201,13 +5201,13 @@ MonoBehaviour:
     size: 80
   - name: safe_Enemy Pair Coumn
     prefab: {fileID: 7450640455303229846, guid: 1db5a0325cafbdc4aa87cea3c204bc00, type: 3}
-    size: 80
+    size: 200
   - name: safe_Enemy Pair Coumn left
     prefab: {fileID: 13098369127746319, guid: 48ff4336ac24941498741ff0f5bf2be4, type: 3}
-    size: 80
+    size: 200
   - name: safe_Enemy Pair Coumn right
     prefab: {fileID: 8622708135822325973, guid: ca9477aac97106544804a2e5592cf336, type: 3}
-    size: 80
+    size: 200
   - name: safe_ Coin Enemy Pair Coumn
     prefab: {fileID: 7450640455303229846, guid: ac4556c1156ef8f449e777cdfc73a20e, type: 3}
     size: 80

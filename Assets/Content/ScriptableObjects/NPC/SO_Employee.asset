@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1f67d21e2e46142ad7113893171794, type: 3}
   m_Name: SO_Employee
   m_EditorClassIdentifier: Assembly-CSharp::SO_Employee
-  Speed: 0.771
+  Speed: 0.75
