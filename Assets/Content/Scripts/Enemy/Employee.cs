@@ -103,13 +103,15 @@ public class Employee : Target
             return;
         }
     }
+    private Vector3 smoothVelocity = Vector3.zero * 0.01f;
+    private float smoothTime = 0.1f;
     private void Chase()
     {
         SteeringSeparation();
         if (player) {  
             targetLocation.y = 0.75f;
 
-            if (Vector3.Distance(transform.position, player.transform.position) < 3f)
+            if (Vector3.Distance(transform.position, player.transform.position) < 2.5f)
             {
                 Speed = baseSpeed * 0.55f;
             }
@@ -117,8 +119,8 @@ public class Employee : Target
             {
                 Speed = baseSpeed;
             }
-            Vector3 targetPos = player.transform.position + player.transform.forward * -2.25f;
-            rb.position = Vector3.MoveTowards(transform.position, player.transform.position, Speed * Time.fixedDeltaTime);
+            Vector3 targetPos = player.transform.position + player.transform.forward * -.5f;
+            rb.position = Vector3.SmoothDamp(transform.position, targetPos, ref smoothVelocity, smoothTime);
 
             Invoke(nameof( WaitChase), Chase_Wait_Time);
         }  

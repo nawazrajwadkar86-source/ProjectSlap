@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96deac4c61f9a384681f285fa112931a, type: 3}
-  m_Name: AP_safe01
+  m_Name: AP_safe02
   m_EditorClassIdentifier: Assembly-CSharp::ActorPlacement
   PlacementSlots:
   - placmenColumns: 000000000000000000000000
-  - placmenColumns: 06000000000000000c000000
-  - placmenColumns: 060000000000000002000000
-  - placmenColumns: 030000000c00000004000000
-  - placmenColumns: 020000000d0000000c000000
+  - placmenColumns: 020000000000000000000000
+  - placmenColumns: 000000000000000000000000
+  - placmenColumns: 020000000200000002000000
+  - placmenColumns: 000000000000000000000000
   - placmenColumns: 000000000100000000000000

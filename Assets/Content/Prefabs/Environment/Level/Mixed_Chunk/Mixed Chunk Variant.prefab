@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79acd195138fe6f4e8aa33944b3adbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ActorGenerator
+  chunkType: 3
   actorContainer: {fileID: 11400000, guid: 85f667ccb779d714684708577ab8c68d, type: 2}
   spawnPoints:
   - column:

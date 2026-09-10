@@ -1,8 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class ActorGenerator : MonoBehaviour
 {
+    public ChunkType chunkType;
     private ActorsPlacementBluprint actorsPlacementBluprints;
     private ActorPlacement actorPlacement;
     private ObjectPooling objectPooling;
@@ -44,7 +47,8 @@ public class ActorGenerator : MonoBehaviour
 
         //
         actorsPlacementBluprints = Resources.Load<ActorsPlacementBluprint>("Actor Placement Bluprints/ActorsPlacementBluprint");
-        actorPlacement = actorsPlacementBluprints.placementList[Random.Range(0, actorsPlacementBluprints.placementList.Count)];
+        List<ActorPlacement> retrivedActorPlacement = GetChunkSpecificPlacement(chunkType);
+        actorPlacement = retrivedActorPlacement[Random.Range(0, retrivedActorPlacement.Count)];
 
     }
     private void spawnActors()
@@ -81,4 +85,28 @@ public class ActorGenerator : MonoBehaviour
         public Vector3[] column = new Vector3[3];
     }
 
+    private List<ActorPlacement> GetChunkSpecificPlacement(ChunkType cType)
+    {
+        List<ActorPlacement> ap = new List<ActorPlacement>();
+        switch (cType)
+        {
+            case ChunkType.safe:
+            ap = actorsPlacementBluprints.placementListSafeC;
+            break;
+            case ChunkType.crowd:
+            ap = actorsPlacementBluprints.placementListMixedC;
+            break;
+            case ChunkType.hazard:
+            break;
+            case ChunkType.mixed:
+            ap = actorsPlacementBluprints.placementListMixedC;
+            break;
+            case ChunkType.event_:
+            break;
+            case ChunkType.transition:
+            ap = actorsPlacementBluprints.placementListSafeC;
+            break;
+        }
+        return ap;
+    }
 }

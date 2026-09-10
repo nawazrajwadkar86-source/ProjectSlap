@@ -37,7 +37,7 @@ public class SlapManager : MonoBehaviour
         front_slap,
         right_slap,
         left_slap,
-
+        punch,
     }
     public ESlapType ESlap_type = ESlapType.right_slap;
     void Start()
@@ -200,12 +200,12 @@ public class SlapManager : MonoBehaviour
         if (RelativeLocation.x > 0)
         {
             Flip_animation_temp(1);
-            slapType = ESlapType.right_slap;
+            slapType = UnityEngine.Random.Range(0.0f, 1.0f) < 0.5f ? ESlapType.right_slap : ESlapType.punch;
         }
         else if (RelativeLocation.x < 0)
         {
             Flip_animation_temp(-1);
-            slapType = ESlapType.left_slap;
+            slapType = UnityEngine.Random.Range(0.0f, 1.0f) < 0.5f ? ESlapType.left_slap : ESlapType.punch;
         }
         else if (RelativeLocation.z > 0)
         {

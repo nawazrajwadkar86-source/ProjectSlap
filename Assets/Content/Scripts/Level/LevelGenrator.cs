@@ -16,7 +16,17 @@ public class LevelGenrator : MonoBehaviour
     private float currentChunkbasePos; // Y
     private float nextChunkPosZ;
     private float nextChunkGenCallPos;
+    private int currentChunkNum;
     public Action OnchunkUpdate;
+
+    //Elevator spawns
+    private int totalFloor = 2;
+    private int currentFloor = 1;
+    private Vector2Int minMaxNextElevatorIndex = new Vector2Int(7,10);
+    private int newElevatorSpawnIndex;
+
+    private const string elevator01_Up = "Elevator01_Up";
+    private const string elevator01_Down = "Elevator01_Down";
 
     private void Start()
     {
@@ -33,6 +43,7 @@ public class LevelGenrator : MonoBehaviour
     private void Update()
     {
         GenrateChunkPerSection();
+        //currentChunkText.text = currentChunkNum.ToString();
     }
     private void GenrateChunkPerSection()
     {
@@ -42,11 +53,11 @@ public class LevelGenrator : MonoBehaviour
 
             //initial chunk
             ChunkPooling.StoreObject(chunksObjQueue.Dequeue()); 
-
+            
             //nextChunkGenCallPos += previousChunkLength;
             nextChunkGenCallPos += chunkQueue.Peek().chunkLength;
             chunkQueue.Dequeue();
-
+            
             //currentChunkIndex.text = "Current Chunk: " + currentCreateIndex.ToString();
         }
     }
@@ -66,17 +77,27 @@ public class LevelGenrator : MonoBehaviour
         }
         
         nextChunkGenCallPos = 45 + chunkQueue.Peek().chunkLength;
+
+        newElevatorSpawnIndex = newElevatorSpawnIndex = currentChunkNum + UnityEngine.Random.Range(minMaxNextElevatorIndex.x,minMaxNextElevatorIndex.y);
+        currentChunkNum ++;
     }
     private void GenerateChunk()
     {
         //int RandomChunk = Random.Range(0, chunks.Count);
-        int [] tempIndex = {0,1,3,5};//
+        int [] tempIndex = {0,1,3};//
         int RandomChunk = tempIndex[UnityEngine.Random.Range(0,tempIndex.Length)];
         Chunk chunk = chunks[RandomChunk];
         GameObject newChunk;
         ChunkProperty newChunkProperty = null;
 
-        switch (chunk.chunkType)
+        if (currentChunkNum > newElevatorSpawnIndex)
+        {
+            newChunkProperty = ChunkPooling.GetChunkPropertyByName(selectElevator());
+            newElevatorSpawnIndex = currentChunkNum + UnityEngine.Random.Range(minMaxNextElevatorIndex.x,minMaxNextElevatorIndex.y);
+        }
+        else
+        {
+            switch (chunk.chunkType)
         {
             case ChunkType.safe:
                 newChunkProperty = ChunkPooling.GetChunkProperty(ChunkType.safe);
@@ -97,6 +118,9 @@ public class LevelGenrator : MonoBehaviour
                 newChunkProperty = ChunkPooling.GetChunkProperty(ChunkType.transition);
                 break;
         }
+        }
+
+        
         
 
         Vector3 nextChunkPosition = new Vector3(0, currentChunkbasePos, nextChunkPosZ);
@@ -106,20 +130,50 @@ public class LevelGenrator : MonoBehaviour
         previousChunkLength = newChunkProperty.chunkLength;
         nextChunkPosZ += newChunkProperty.chunkLength;
 
+        currentChunkNum++;
+
         chunkQueue.Enqueue(newChunkProperty);
 
         chunksObjQueue.Enqueue(newChunk);
     
         OnchunkUpdate?.Invoke();
     }
+    private string selectElevator()
+    {
+        string value = "";
+        if(currentFloor == 1)
+        {
+            if( UnityEngine.Random.Range(0.0f,1.0f) > 0.5f)
+            {
+                value = elevator01_Up;
+                currentFloor = 2;
+            }
+            else
+            {
+                value = elevator01_Down;
+                currentFloor = 0;
+            }
+        }else if(currentFloor == 0)
+        {
+            value = elevator01_Up;
+            currentFloor = 1;
+        }else if (currentFloor == 2)
+        {
+            value = elevator01_Down;
+            currentFloor = 1;
+        }
+
+        return value;
+    }
+
 
         //Debugging
     private Canvas canvas;
-    private TextMeshProUGUI currentChunkIndex;
+    private TextMeshProUGUI currentChunkText;
     private void InitializeDebugging()
     {
         canvas = FindAnyObjectByType<Canvas>();
-        currentChunkIndex = CreateText("Current Chunk: 0", new Vector2(-Screen.width / 2 + 100, Screen.height / 2 - 50));
+        currentChunkText = CreateText("Current Chunk: 0", new Vector2(-Screen.width / 2 - 100, Screen.height / 2 + 50));
     }
 
     private TextMeshProUGUI CreateText(string text, Vector2 position)
@@ -148,5 +202,5 @@ public enum ChunkType
     hazard,
     mixed,
     event_,
-    transition,
+    transition,   
 }

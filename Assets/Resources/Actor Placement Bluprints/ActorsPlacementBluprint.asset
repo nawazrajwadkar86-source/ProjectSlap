@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce85a44316ca3944be6f88c1e0f74ff, type: 3}
   m_Name: ActorsPlacementBluprint
   m_EditorClassIdentifier: Assembly-CSharp::ActorsPlacementBluprint
-  placementList:
+  placementListSafeC:
   - {fileID: 11400000, guid: 79b69844972e0ee4c90e2bf0a56a23ce, type: 2}
   - {fileID: 11400000, guid: 53b587c7181475f49ac2cb80f5b5258c, type: 2}
   - {fileID: 11400000, guid: b42ab2772994a2d4596961f21eaf0520, type: 2}
   - {fileID: 11400000, guid: 2c49938fec850b64da4cf8de41e7b550, type: 2}
+  placementListMixedC:
+  - {fileID: 11400000, guid: 45b1eb84a9e68524e9955a9e8de7cf17, type: 2}
