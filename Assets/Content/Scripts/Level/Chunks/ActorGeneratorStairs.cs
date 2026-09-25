@@ -18,7 +18,6 @@ public class ActorGeneratorStairs : MonoBehaviour
         {
             spawnActors();
         }
-        
     }
     private void Start()
     {

@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 21803763}
   - component: {fileID: 21803762}
+  - component: {fileID: 21803764}
   m_Layer: 0
   m_Name: LevelGenrator
   m_TagString: Untagged
@@ -172,6 +173,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &21803764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21803761}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.033333335
+  m_MinRegionArea: 1
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &57490491
 GameObject:
   m_ObjectHideFlags: 0
@@ -3830,6 +3863,9 @@ MonoBehaviour:
   - name: Elevator01_Down
     Object: {fileID: 11400000, guid: a349389da8879c648a81e90a1ed61725, type: 2}
     size: 10
+  - name: Start_Chunk01
+    Object: {fileID: 11400000, guid: 30460ecd3985f50499e984999485ddde, type: 2}
+    size: 2
 --- !u!4 &1283956180
 Transform:
   m_ObjectHideFlags: 0
@@ -6554,7 +6590,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138886406}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac5b3d19c59bdb14d83bb556bc575277, type: 3}
   m_Name: 

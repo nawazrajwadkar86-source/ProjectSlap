@@ -1,11 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class LevelGenrator : MonoBehaviour
 {
     public static LevelGenrator instance;
+    private NavMeshSurface navMeshSurface;
     public Transform Player;
     public List<Chunk> chunks;
     private Queue<GameObject> chunksObjQueue = new Queue<GameObject>();
@@ -25,8 +28,13 @@ public class LevelGenrator : MonoBehaviour
     private Vector2Int minMaxNextElevatorIndex = new Vector2Int(7,10);
     private int newElevatorSpawnIndex;
 
+    private const string starting01 = "Start_Chunk01";
     private const string elevator01_Up = "Elevator01_Up";
     private const string elevator01_Down = "Elevator01_Down";
+    private void Awake()
+    {
+        navMeshSurface = GetComponent<NavMeshSurface>();
+    }
 
     private void Start()
     {
@@ -46,11 +54,12 @@ public class LevelGenrator : MonoBehaviour
         //currentChunkText.text = currentChunkNum.ToString();
     }
     private void GenrateChunkPerSection()
-    {
+    {   
         if(Player.position.z > nextChunkGenCallPos)
         {
-            GenerateChunk();     
-
+            GenerateChunk();  
+            //StartCoroutine(updateNavMeshSurface());
+            
             //initial chunk
             ChunkPooling.StoreObject(chunksObjQueue.Dequeue()); 
             
@@ -61,10 +70,16 @@ public class LevelGenrator : MonoBehaviour
             //currentChunkIndex.text = "Current Chunk: " + currentCreateIndex.ToString();
         }
     }
+    IEnumerator updateNavMeshSurface()
+    {
+        AsyncOperation operation = navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
+
+        yield return operation;
+    }
     private void GenrateStartingChunk()
     {
         //genrate starting 5 chunks;
-        GameObject newChunk = ChunkPooling.GetObject(ChunkPooling.GetChunkProperty(ChunkType.safe), Vector3.zero, Quaternion.identity);
+        GameObject newChunk = ChunkPooling.GetObject(ChunkPooling.GetChunkPropertyByName(starting01), Vector3.zero, Quaternion.identity);
 
         chunksObjQueue.Enqueue(newChunk);
 
@@ -75,6 +90,7 @@ public class LevelGenrator : MonoBehaviour
         {
             GenerateChunk();
         }
+        //navMeshSurface.BuildNavMesh();
         
         nextChunkGenCallPos = 45 + chunkQueue.Peek().chunkLength;
 

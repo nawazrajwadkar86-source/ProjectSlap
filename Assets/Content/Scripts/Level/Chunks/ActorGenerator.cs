@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class ActorGenerator : MonoBehaviour
@@ -14,7 +15,6 @@ public class ActorGenerator : MonoBehaviour
     private const int laneWidthOffset = 2;
     private const int laneLengthOffset = 10;
     public List<GameObject> spawnedActors = new List<GameObject>();
-
     private void OnEnable()
     {
         if(objectPooling != null)

@@ -1,60 +1,59 @@
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Employee : Target
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Rigidbody rb;
-    public float HeatIncreaseVal = 0.2f;
+{    
+    public float HeatIncreaseVal = 0.1f;
     public bool CanChase;
-    public float Speed;
-    private float baseSpeed;
-    private GameObject player;
     private Vector3 targetLocation;
-    private Tween chaseT;
-    public float Chase_Wait_Time;
-    private float LifeTime = 12f;
-    public enum EChaseState { 
-    
-        idle,
-        chasing,
-        caught
-
-    }
-    public EChaseState chaseState = EChaseState.idle;
+   
     public SO_Employee SO;
-    void Start()
+    protected override void Start()
     {
         this.HeatIncreaseValue = HeatIncreaseVal;
         player = GameObject.FindGameObjectWithTag("Player");
-        //Speed = 1- SO.Speed;
         baseSpeed = Speed;
+        if(navAgent == null) navAgent = GetComponent<NavMeshAgent>();
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        transform.localPosition = Vector3.zero;
+        
+        if(navAgent == null)navAgent = GetComponent<NavMeshAgent>();
         chaseState = EChaseState.idle;
+        navAgent.Warp(Vector3.zero);
+
+        transform.localPosition = Vector3.zero;
+        isChasing = false;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if(chaseState == EChaseState.chasing)
         {
             Chase();
+            animator.SetBool("run",true);
         }
         if(chaseState == EChaseState.caught)
         {
-            rb.position = transform.position;
+            navAgent.SetDestination(transform.position);
+            transform.position = transform.position;
+            animator.SetBool("run",false);
+        }
+        if (chaseState == EChaseState.idle)
+        {
+            //if(navAgent.isActiveAndEnabled && navAgent.isOnNavMesh)navAgent.SetDestination(transform.position);
+            animator.SetBool("run",false);
         }
     }
     protected override void ReceiveDamage(ETargetType type)
     {
        // bisSlapped = true;
-        animator.SetTrigger("hit");
+        //animator.SetTrigger("hit");
     }
     protected override void UpdateMultiSlapMeter(ETargetType type)
     {
@@ -63,76 +62,17 @@ public class Employee : Target
     protected override void UpdateHeatMeter(ETargetType type)
     {
         HeatMeter.HeatMeter_Instance.Updateheat(HeatIncreaseValue);
-    
     }
     protected override void Reaction(ETargetType type)
-    {
-        Debug.Log("Reaction Called");   
-
+    { 
+        if(isChasing) return;
         if(chaseState != EChaseState.caught)
         {
-        this.chaseState = EChaseState.chasing;
-        StartCoroutine(NpcEndLife());
+            this.chaseState = EChaseState.chasing;
+            isChasing = true;
+            StartCoroutine(NpcEndLife());
         }
     }
-    protected override void SteeringSeparation()
-    {
-        if (chaseState == EChaseState.chasing)
-        {
-            Vector3 separation = Vector3.zero;
-
-            Collider[] cols = Physics.OverlapSphere(transform.position, 1f);
-            foreach (var col in cols)
-            {
-                if (player == null) return;
-                if (col.gameObject == gameObject)
-                {
-                    continue;
-                }
-                if (col.transform.CompareTag("npc"))
-                {
-                    separation += (transform.position -
-                        col.transform.position).normalized;
-                }
-            }
-            Vector3 Desired = (player.transform.position - transform.position).normalized + separation * 2;
-            targetLocation = transform.position + Desired;
-        }
-        else
-        {
-            return;
-        }
-    }
-    private Vector3 smoothVelocity = Vector3.zero * 0.01f;
-    private float smoothTime = 0.1f;
-    private void Chase()
-    {
-        SteeringSeparation();
-        if (player) {  
-            targetLocation.y = 0.75f;
-
-            if (Vector3.Distance(transform.position, player.transform.position) < 2.5f)
-            {
-                Speed = baseSpeed * 0.55f;
-            }
-            else
-            {
-                Speed = baseSpeed;
-            }
-            Vector3 targetPos = player.transform.position + player.transform.forward * -.5f;
-            rb.position = Vector3.SmoothDamp(transform.position, targetPos, ref smoothVelocity, smoothTime);
-
-            Invoke(nameof( WaitChase), Chase_Wait_Time);
-        }  
-    }
-    private void WaitChase()
-    {
-        chaseT?.Kill();
-        // chaseT = transform.DOMove(targetLocation, Speed).SetEase(Ease.Linear).OnComplete(Chase);
-        //transform.position = ;
-        
-    }
-
     protected override void CaughtPlayer()
     {
         base.CaughtPlayer();
@@ -148,10 +88,15 @@ public class Employee : Target
             Debug.LogError("no PH Found !");
         }
     }
-    IEnumerator NpcEndLife()
+    public override void ChasePlayer()
     {
-        yield return new WaitForSeconds(LifeTime);
-        transform.parent.transform.parent.gameObject.SetActive(false);
+        if(isChasing) return;
+         if(chaseState != EChaseState.caught)
+        {
+            isChasing = true;
+            this.chaseState = EChaseState.chasing;
+            StartCoroutine(NpcEndLife());
+        }
     }
 
     private void OnTriggerEnter(Collider other)

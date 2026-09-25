@@ -28,7 +28,6 @@ public class Coin : MonoBehaviour
     }
     void DestroySelfReleaseMemeory()
     {
-
         gameObject.SetActive(false);
     }
 }

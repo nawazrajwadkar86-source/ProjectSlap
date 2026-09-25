@@ -160,18 +160,20 @@ public class SlapManager : MonoBehaviour
                 if (target != null)
                 {
 
+                                            ChooseSlapType(ref e_slapType);
+                        animator.SetTrigger(e_slapType.ToString());
+                        SlapCounter.Instance.EventOnSlap();
+                        StartCoroutine(Timer(0.3f, () => IsSlapped(target)));
                     if (target.bisSlapped)
                     {
                         return;
                     }
                     if (!target.bisSlapped)
                     {
-                        ChooseSlapType(ref e_slapType);
-                        animator.SetTrigger(e_slapType.ToString());
-                        SlapCounter.Instance.EventOnSlap();
-                        StartCoroutine(Timer(0.3f, () => IsSlapped(target)));
+
                         target.bisSlapped = true;
                     }
+                    
 
                     //  target.bisSlapped = true;
                 }

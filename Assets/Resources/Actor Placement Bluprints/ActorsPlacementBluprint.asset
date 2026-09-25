@@ -19,3 +19,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c49938fec850b64da4cf8de41e7b550, type: 2}
   placementListMixedC:
   - {fileID: 11400000, guid: 45b1eb84a9e68524e9955a9e8de7cf17, type: 2}
+  - {fileID: 11400000, guid: e0a39077419659c47ae82a13160287d8, type: 2}
+  - {fileID: 11400000, guid: 73c57168e82902643b274827563106ea, type: 2}
